@@ -3,10 +3,10 @@ import random, time
 from django.http import HttpRequest, HttpResponse
 
 pictures = [
-    'frida-1.jpg',
-    'frida-3.jpg',
-    'frida-4.jpeg',
-    'frida-5.jpg',
+    'https://cs-people.bu.edu/ievas/a03/frida-1.jpg',
+    'https://cs-people.bu.edu/ievas/a03/frida-3.jpg',
+    'https://cs-people.bu.edu/ievas/a03/frida-4.jpeg',
+    'https://cs-people.bu.edu/ievas/a03/frida-5.jpg',
 ]
 
 quotes = [
@@ -51,11 +51,11 @@ def about(request):
     # delegate response to the template:
     return render(request, template_name, context)
 
-def showall(request):
-    '''A function to respond to the /showall URL. This function will delegate work to an HTML template
+def show_all(request):
+    '''A function to respond to the /show_all URL. This function will delegate work to an HTML template
     '''
     
-    template_name = "quote/showall.html"
+    template_name = "quote/show_all.html"
 
     # create a dictionary of context variables
     context = {

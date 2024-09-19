@@ -6,7 +6,7 @@
         <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
             {% for picture in pictures %}
                 <div>
-                    <img src="{% static picture %}" alt="Photo of Frida Kahlo" style="width: 300px; height: 400px; margin-top: 15px;">
+                    <img src="{{picture}}" alt="Photo of Frida Kahlo" style="width: 300px; height: 400px; margin-top: 15px;">
         
                 </div>
             {% endfor %}
