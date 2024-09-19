@@ -1,0 +1,10 @@
+{% extends 'quote/base.html' %}
+
+{% load static %}
+
+{% block content %}
+        <img src="{% static chosen_picture %}" alt="Picture of Frida Kahlo">
+        <p> 
+           {{chosen_quote}}
+        </p>
+{% endblock %}
