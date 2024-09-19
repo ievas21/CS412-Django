@@ -22,7 +22,7 @@ def quote(request):
     '''A function to respond to the /quote URL. This function will delegate work to an HTML template
     '''
     
-    template_name = "quote/quote.html"
+    template_name = "quotes/quote.html"
 
     selected_image = random.choice(pictures)
     selected_quote = random.choice(quotes)
@@ -41,7 +41,7 @@ def about(request):
     '''A function to respond to the /about URL. This function will delegate work to an HTML template
     '''
     
-    template_name = "quote/about.html"
+    template_name = "quotes/about.html"
 
     # create a dictionary of context variables
     context = {
@@ -55,7 +55,7 @@ def show_all(request):
     '''A function to respond to the /show_all URL. This function will delegate work to an HTML template
     '''
     
-    template_name = "quote/show_all.html"
+    template_name = "quotes/show_all.html"
 
     # create a dictionary of context variables
     context = {
