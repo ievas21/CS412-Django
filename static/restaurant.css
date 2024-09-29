@@ -1,0 +1,218 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+ }
+
+ body {
+    background-color:  #5e4949;
+    font-family: 'Merriweather', serif;
+ }
+
+ h1 {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    font-size: 50px;
+    color: 	 #ffecda;
+    font-family: 'Merriweather', serif;
+}
+
+h2 {
+    color: #ffecda;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-size: 30px;
+}
+
+h4 {
+    color: #ffecda;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-size: 25px;
+}
+
+.hours {
+    text-align: center;
+}
+
+.hours ul {
+    display: flex;
+    justify-content: center; 
+    flex-direction: column;
+    text-align: center;
+    list-style-type: none;
+}
+
+.hours li {
+    color: #ffecda;
+    font-size: 20px;
+    margin-right: 30px;
+}
+
+.hours h3 {
+    color: #ffecda;
+    margin-bottom: 5px;
+    margin-top: 30px;
+    font-size: 30px;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-right: 44px;
+}
+
+a {
+    padding: 10px;
+    text-decoration: none;
+    font-size: 16px;
+    background-color: #764f51;
+    border-radius: 12px;
+    padding: 8px;
+    color:  #f2f9f1;
+    font-family: 'Merriweather', serif;
+}
+
+#footer {
+    font-size: 13px;
+    font-family: "Gill Sans Extrabold", sans-serif;
+    margin-top: 5px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    color: #ffecda;
+}
+
+
+img {
+    max-width: 550px;
+    height: 500px;
+    margin-right: 100px; 
+    border-radius: 25px;
+    padding-bottom: 10px;
+}
+
+hr {            
+    border: none; 
+    height: 1px;              
+    background-color: #ffecda; 
+    margin: 8px 0; 
+}
+
+.entire-page {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px;
+}
+
+.information-section {
+    flex: 1;
+    padding-right: 20px;
+    margin-right: 100px;
+    margin-left: 80px;
+}
+
+.image-section {
+    flex: 0 0 auto;
+}
+
+#order-heading {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.form-section {
+    display: flex;
+    justify-content: center;
+    text-align: left;
+} 
+
+label, h3 {
+    color: #ffecda;
+    font-size: 18px;
+    font-weight: bold;
+    
+}
+
+input[type="text"] {
+    width: 100%;            
+    padding: 10px;          
+    border: 2px solid #764f51; 
+    border-radius: 5px;     
+    font-size: 16px;        
+    background-color: #f2f9f1; 
+    color: #333;           
+    margin-bottom: 10px;    
+    margin-top: 6px;
+}
+
+input[type="submit"] {
+    width: 50%;            
+    padding: 10px;          
+    border: 2px solid #764f51; 
+    border-radius: 12px;     
+    font-size: 20px;        
+    background-color: #f2f9f1;
+    color: #333;            
+    margin: 0 auto;   
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    color: #764f51;
+    font-weight: bold;
+
+}
+
+textarea {
+    width: 100%;            
+    padding: 10px;          
+    border: 2px solid #764f51; 
+    border-radius: 5px;     
+    font-size: 16px;        
+    background-color: #f2f9f1; 
+    color: #333;           
+    box-sizing: border-box; 
+    margin-bottom: 10px;    
+    margin-top: 6px;
+}
+
+.special-heading {
+    font-size: 25px;
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+}
+
+.confirmation-section {
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 0 auto; 
+    padding: 20px; 
+    max-width: 600px; 
+    background-color: #764f51; 
+    border-radius: 12px; 
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); 
+}
+
+.confirmation-section ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: center; 
+    flex-direction: column;
+    text-align: center;
+    margin-right: 20px;
+
+}

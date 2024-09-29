@@ -1,0 +1,34 @@
+<!--This is the base page from which all others will inherit
+Put common code here, specific code in separate pages-->
+
+{% load static %}
+
+<html>
+
+<head>
+    <title>Grand Duke's Restaurant</title>
+    <link rel="stylesheet" href="https://cs-people.bu.edu/ievas/a04/restaurant.css">
+</head>
+
+<body>
+    <h1>Grand Duke's Restaurant</h1>
+    <nav>
+        <ul>
+            <a href="{% url 'main' %}">Main Page</a>
+            <a href="{% url 'order' %}">Order Page</a>
+        </ul>
+    </nav>
+
+    {% block content %}
+    <!--Put interesting stuff (specific stuff) here-->
+    {% endblock %}
+
+    <hr>
+    <p id="footer">
+        Page created by ievas@bu.edu <br>
+        This page was generated at {{current_time}}. <br> <br>
+    </p>
+
+</body>
+
+</html>
