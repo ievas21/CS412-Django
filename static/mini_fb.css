@@ -1,0 +1,77 @@
+/* Ieva sagaitis, ievas@bu.edu*/
+
+/*Creates the style sheet for our mini_fb main page*/
+
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #a2a8d3;
+    font-family: 'Merriweather', serif;
+}
+
+h1{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 0;
+    font-weight: bold;
+}
+
+.profiles-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.profile-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    width: 600px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background: #e7eaf6;
+}
+
+.profile-image {
+    border-radius: 20%;
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+h2 {
+    margin: 0;
+}
+
+h3 {
+    margin: 5px 0;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 0;
+    padding: 10px;
+    font-size: 13px;
+    background: #e7eaf6;
+}
+
+.profile-table {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-spacing: 20px;
+}

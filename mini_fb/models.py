@@ -1,8 +1,8 @@
 from django.db import models
-
-# Create your models here.
+# Ieva sagaitis, ievas@bu.edu
+# Creates a profile model with the user's name, city, image, and email
 class Profile(models.Model):
-    '''Encapsulate the data for a Profile'''
+    '''Encapsulate the data for a Profile in our application'''
 
     # data attributes
     first_name = models.TextField(blank=False)
