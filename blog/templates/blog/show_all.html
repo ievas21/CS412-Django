@@ -1,0 +1,21 @@
+{% extends 'blog/base.html' %}
+
+
+{% block content %}
+<h1 style="display:flex; justify-content: center;">Showing All Articles</h1>
+
+<!-- print out the context variable called articles -->
+<main class="grid-container">
+    {% for a in articles %}
+    <article>
+        <h2>{{a.title}}</h2>
+        <h3>by {{a.author}} at {{a.published}}</h3>
+        <img src="{{a.image_url}}" alt="{{a.image_url}}">
+        <p>
+            {{a.text}}
+        </p>
+    </article>
+    {% endfor %}
+</main>
+
+{% endblock %}
