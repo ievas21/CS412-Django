@@ -14,4 +14,25 @@ class Profile(models.Model):
     def __str__(self):
         '''Return a string representation of this Profile'''
         return f"{self.first_name} {self.last_name}"
+    
+    def get_status_messages(self):
+        '''Retrieve all status messages for this Profile'''
+
+        # use the ORM to filter Comments where this instance of an object is the FK
+        messages = StatusMessage.objects.filter(profile=self)
+        return messages
+    
+
+class StatusMessage(models.Model):
+    '''Encapsulate a status message on a profile.'''
+
+    # create a 1 to many relationship between Profile and Status Message
+    profile = models.ForeignKey("Profile", on_delete=models.CASCADE) ## foreign key specification
+
+    timestamp =  models.DateTimeField(auto_now=True)
+    message = models.TextField(blank=False)
+
+    def __str__(self):
+        '''Return a string representation method.'''
+        return f'{self.message}'
 

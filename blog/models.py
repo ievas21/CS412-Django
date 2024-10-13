@@ -14,4 +14,26 @@ class Article(models.Model):
     def __str__(self):
         '''Return a string representation of this Article'''
         return f"{self.title} by {self.author}"
+    
+    def get_comments(self):
+        '''Retrieve all comments for this Article'''
 
+        # use the ORM to filter Comments where this instance of an object is the FK
+        comments = Comment.objects.filter(article=self)
+        return comments
+    
+    
+
+class Comment(models.Model):
+    '''Encapsulate a comment on an article.'''
+
+    # create a 1 to many relationship between Articles and Comments
+    article = models.ForeignKey("Article", on_delete=models.CASCADE) ## foreign key specification
+
+    author =  models.TextField(blank=False)
+    text =  models.TextField(blank=False)
+    published = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        '''Return a string representation method.'''
+        return f'{self.text}'

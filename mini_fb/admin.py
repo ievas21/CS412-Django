@@ -5,3 +5,4 @@ from .models import *
 # Ieva sagaitis, ievas@bu.edu
 
 admin.site.register(Profile)
+admin.site.register(StatusMessage)

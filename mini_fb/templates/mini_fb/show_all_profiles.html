@@ -8,27 +8,25 @@ This code is specific for the main '' page
 
 {% block content %}
 
-<h1>Facebook Profiles</h1>
-
 <main class="profiles-container">
-    <table class="profile-table">
-        {% for p in profiles %}
-        <tr>
-            <td>
-                <div class="profile-card">
 
-                    <img src="{{p.image_url}}" alt="{{p.first_name}} {{p.last_name}}" class="profile-image">
+    {% for p in profiles %}
+    <div class="profile-card">
 
-                    <h2>{{p.first_name}} {{p.last_name}}</h2>
+        <a href="{% url 'show_profile' p.pk %}"> 
+            <img src="{{p.image_url}}" alt="{{p.first_name}} {{p.last_name}}" class="profile-image">
+        </a>
 
-                    <h3>From {{p.city}}</h3>
+        <a href="{% url 'show_profile' p.pk %}">
+            <h2>{{p.first_name}} {{p.last_name}}</h2>
+        </a>
 
-                    <h3>Email: {{p.email}}</h3>
+        <h3>From {{p.city}}</h3>
 
-                </div>
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
+        <h3>Email: {{p.email}}</h3>
+    </div>
+    {% endfor %}
 </main>
+
 {% endblock %}
+

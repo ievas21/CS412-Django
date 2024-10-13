@@ -5,6 +5,12 @@
         <link rel="stylesheet" href="{% static 'styles-blog.css' %}">
     </head>
     <body>
+        <nav>
+            <ul>
+                <a href="{% url 'show_all' %}">Show All</a>
+                <a href="{% url 'random' %}">Random</a>
+            </ul>
+        </nav>
     
         {% block content %}
         
