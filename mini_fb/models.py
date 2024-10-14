@@ -1,4 +1,6 @@
 from django.db import models
+from django.urls import reverse
+
 # Ieva sagaitis, ievas@bu.edu
 # Creates a profile model with the user's name, city, image, and email
 class Profile(models.Model):
@@ -9,7 +11,7 @@ class Profile(models.Model):
     last_name =  models.TextField(blank=False)
     city =  models.TextField(blank=False)
     email =  models.TextField(blank=False)
-    image_url = models.URLField(blank=False) 
+    image_url = models.TextField(blank=False) 
 
     def __str__(self):
         '''Return a string representation of this Profile'''
@@ -21,6 +23,10 @@ class Profile(models.Model):
         # use the ORM to filter Comments where this instance of an object is the FK
         messages = StatusMessage.objects.filter(profile=self)
         return messages
+    
+    def get_absolute_url(self):
+        return reverse("profile", kwargs={"pk": self.pk})
+
     
 
 class StatusMessage(models.Model):

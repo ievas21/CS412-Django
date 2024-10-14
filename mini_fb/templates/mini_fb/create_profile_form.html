@@ -1,0 +1,23 @@
+{% extends 'mini_fb/base.html' %}
+
+{% block content %}
+
+<div class="profile-form-container">
+    <h2 class="form-title">Add a Profile</h2>
+
+    <form method="POST" class="profile-form">
+        <!-- Display the form (context variable) -->
+        <div class="form-body">
+            {{ form.as_p }}
+        </div>
+
+        {% csrf_token %}
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Create Profile</button> <br><br>
+            <a href="{% url 'show_all_profiles' %}" class="nav-link-cancel">Cancel</a>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

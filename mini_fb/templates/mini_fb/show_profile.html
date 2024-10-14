@@ -7,6 +7,7 @@
     <div class="profile-wrapper">
         <div class="individual-profile">
             <img src="{{profile.image_url}}" alt="{{profile.image_url}}">
+
             <h2>{{profile.first_name}} {{profile.last_name}}</h2> <br>
             <h3>{{profile.city}}</h3> <br>
             <h4>{{profile.email}}</h4> <br>
@@ -21,16 +22,19 @@
             <p>
                 {{s.message}} - {{s.timestamp}} <br><br>
             </p>
+
         </div>
         {% endfor %}
 
         {% else %}
         <div>
-            <h4>No Status Messages.</h4>
+            <h4>No Status Messages.</h4> <br> <br>
         </div>
         {% endif %}
+        <a href="{% url 'create_status' profile.pk %}" class="nav-link-status">Create Status Message</a>
 
     </div>
+    
     </div>
 </main>
 

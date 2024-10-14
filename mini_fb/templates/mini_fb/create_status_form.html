@@ -1,0 +1,23 @@
+{% extends 'mini_fb/base.html' %}
+
+{% block content %}
+
+<div class="status-form-container">
+    <h2 class="form-title">Add a Status Message For {{ profile.first_name }} {{ profile.last_name }}</h2>
+
+    <form method="POST" class="profile-form">
+        <!-- Display the form (context variable) -->
+        <div class="form-body">
+            {{ form.as_p }}
+        </div>
+
+        {% csrf_token %}
+
+        <div class="form-actions">
+            <button type="submit" class="btn">Create Message</button>
+            <a href="{% url 'show_profile' profile.pk %}"  class="nav-link-cancel" >Cancel</a>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
