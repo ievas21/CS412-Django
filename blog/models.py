@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 # Create your models here.
 class Article(models.Model):
@@ -9,7 +10,8 @@ class Article(models.Model):
     author =  models.TextField(blank=False)
     text =  models.TextField(blank=False)
     published = models.DateTimeField(auto_now=True)
-    image_url = models.URLField(blank=True) ## new field
+    # image_url = models.URLField(blank=True) ## new field
+    image_file = models.ImageField(blank=True)
 
     def __str__(self):
         '''Return a string representation of this Article'''
@@ -21,6 +23,12 @@ class Article(models.Model):
         # use the ORM to filter Comments where this instance of an object is the FK
         comments = Comment.objects.filter(article=self)
         return comments
+    
+    def get_absolute_url(self):
+        '''Return the URL to view one instance of this object.'''
+
+        # self.pk the primary key for an object instance
+        return reverse('article', kwargs={'pk': self.pk})
     
     
 

@@ -41,4 +41,25 @@ class StatusMessage(models.Model):
     def __str__(self):
         '''Return a string representation method.'''
         return f'{self.message}'
+    
+    def get_images(self):
+        '''Retrieve all images for a status message.'''
+
+        # use the ORM to filter Images where this instance of an object is the FK
+        images = Image.objects.filter(status_message=self)
+        return images
+    
+
+class Image(models.Model):
+    '''Encapsulate an image on a status message.'''
+
+    status_message = models.ForeignKey("StatusMessage", on_delete=models.CASCADE) ## foreign key specification
+
+    timestamp = models.DateTimeField(auto_now=True)
+    image_file = models.ImageField(blank=False)
+
+    def __str__(self):
+        '''Return a string representation method.'''
+        return f'{self.image_file}'
+
 

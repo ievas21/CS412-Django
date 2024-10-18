@@ -1,6 +1,7 @@
 from django import forms
 from .models import Profile, StatusMessage
 
+
 class CreateProfileForm(forms.ModelForm):
     '''A form to create Profile data.'''
 
@@ -38,6 +39,7 @@ class CreateProfileForm(forms.ModelForm):
             }),
         }
 
+
 class CreateStatusMessageForm(forms.ModelForm):
     '''A form to create Status Message data.'''
 
@@ -54,4 +56,49 @@ class CreateStatusMessageForm(forms.ModelForm):
             }),
         }
 
- 
+
+class UpdateProfileForm(forms.ModelForm):
+    '''A form to update Profile data.'''
+
+    class Meta:
+        '''Associate this form with the Profile model'''
+        model = Profile
+
+        # only change these fields (not first name nor last name)
+        fields = ['city', 'email', 'image_url']
+
+        widgets = {
+
+            'city': forms.TextInput(attrs={
+                'class': 'small-text-field',
+                'placeholder': 'City',
+                'style': 'width: 150px; margin-right: 0;',
+            }),
+            'email': forms.EmailInput(attrs={
+                'class': 'small-text-field',
+                'placeholder': 'Email Address',
+                'style': 'width: 150px; margin-right: 13px;',
+            }),
+            'image_url': forms.URLInput(attrs={
+                'class': 'small-text-field',
+                'placeholder': 'Profile Image URL',
+                'style': 'width: 150px; margin-right: 45px;',
+            }),
+        }
+
+
+class UpdateStatusMessageForm(forms.ModelForm):
+    '''A form to update Status Message data.'''
+
+    class Meta:
+        '''Associate this form with the Status Message model'''
+        model = StatusMessage
+
+        fields = ['message']
+
+        widgets = {
+            'message': forms.TextInput(attrs={
+                'class': 'large-text-field',
+                'style': 'width: 400px;',
+            }),
+        }

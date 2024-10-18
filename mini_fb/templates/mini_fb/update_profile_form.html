@@ -2,10 +2,10 @@
 
 {% block content %}
 
-<div class="status-form-container">
-    <h2 class="form-title">Add a Status Message For {{ profile.first_name }} {{ profile.last_name }}</h2>
+<div class="profile-form-container">
+    <h2 class="form-title">Update the Profile for {{profile.first_name}} {{profile.last_name}}</h2>
 
-    <form method="POST" class="profile-form" enctype="multipart/form-data">
+    <form method="POST" class="profile-form">
         <!-- Display the form (context variable) -->
         <div class="form-body">
             {{ form.as_p }}
@@ -13,10 +13,8 @@
 
         {% csrf_token %}
 
-        <input id="image-button" type="file" name="files" multiple />
-
         <div class="form-actions">
-            <button type="submit" class="btn">Create Message</button>
+            <button type="submit" class="btn btn-primary">Update Profile</button> <br><br>
             <a href="{% url 'show_profile' profile.pk %}" class="nav-link-cancel">Cancel</a>
         </div>
     </form>

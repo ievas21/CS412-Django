@@ -28,5 +28,10 @@ urlpatterns = [
     path("blog/", include("blog.urls")),
     path("mini_fb/", include("mini_fb.urls")),
     
-] + static(settings.STATIC_URL,
+] 
+
+urlpatterns += static(settings.STATIC_URL,
            document_root=settings.STATIC_ROOT)
+
+urlpatterns += static(settings.MEDIA_URL,
+           document_root=settings.MEDIA_ROOT)

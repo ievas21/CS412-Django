@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import *
-from django.views.generic import ListView, DetailView, CreateView
-from .forms import CreateProfileForm, CreateStatusMessageForm
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from .forms import CreateProfileForm, CreateStatusMessageForm, UpdateProfileForm, UpdateStatusMessageForm
 from django.urls import reverse
 from typing import Any, Dict
 
@@ -52,6 +52,17 @@ class CreateStatusMessageView(CreateView):
 
         profile = Profile.objects.get(pk=self.kwargs['pk'])
         form.instance.profile = profile
+
+        sm = form.save()
+        files = self.request.FILES.getlist('files')
+
+        for file in files:
+            image = Image()
+            image.status_message = sm
+            image.image_file = file
+
+            image.save()
+
         return super().form_valid(form)
     
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
@@ -69,4 +80,56 @@ class CreateStatusMessageView(CreateView):
         # add article to context data
         context['profile'] = profile
         return context
+
+class UpdateProfileView(UpdateView):
+    '''A view used to update Profile data.'''
+
+    model = Profile
+    form_class = UpdateProfileForm
+    template_name = "mini_fb/update_profile_form.html"
+
+    def get_success_url(self):
+        return reverse('show_profile', kwargs={'pk': self.object.pk})
+    
+class DeleteStatusMessageView(DeleteView):
+    '''A view used to delete status messages.'''
+
+    model = StatusMessage
+    template_name = "mini_fb/delete_status_form.html"
+
+    def get_success_url(self):
+
+        return reverse('show_profile', kwargs={'pk': self.object.profile.pk})
+    
+    def get_context_data(self, **kwargs: Any) -> dict:
+        '''Add the profile and status message to the context.'''
+
+        context = super().get_context_data(**kwargs)
+        status_message = self.get_object()  
+        context['profile'] = status_message.profile
+        context['status_message'] = status_message  
+        
+        return context
+    
+    
+class UpdateStatusMessageView(UpdateView):
+    '''A view used to update status messages.'''
+
+    model = StatusMessage
+    form_class = UpdateStatusMessageForm
+    template_name = "mini_fb/update_status_form.html"
+
+    def get_success_url(self):
+        return reverse('show_profile', kwargs={'pk': self.object.profile.pk})
+    
+
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        '''Add the profile associated with the status message to the context'''
+
+        context = super().get_context_data(**kwargs)
+        status_message = StatusMessage.objects.get(pk=self.kwargs['pk'])
+        context['profile'] = status_message.profile
+
+        return context
+    
 

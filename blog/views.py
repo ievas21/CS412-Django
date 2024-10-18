@@ -1,3 +1,5 @@
+from django.forms import BaseModelForm
+from django.http import HttpResponse
 from django.shortcuts import render
 from .models import *
 from .forms import *
@@ -75,5 +77,20 @@ class CreateCommentView(CreateView):
         # add article to context data
         context['article'] = article
         return context
+    
+
+class CreateArticleView(CreateView):
+    '''View to create a new Article instance.'''
+
+    form_class = CreateArticleForm
+    template_name = "blog/create_article_form.html"
+
+    def form_valid(self, form):
+        '''Add some debugging statements.'''
+        print(f'CreateArticleView.form_valid: form.cleaned_data={form.cleaned_data}')
+
+        # delegate work to the super class
+        return super().form_valid(form)
+
     
  

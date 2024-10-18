@@ -92,6 +92,8 @@ nav {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    text-align: center;
     border-radius: 8px;
     padding: 30px;
     max-width: 600px;
@@ -211,8 +213,8 @@ textarea {
 }
 
 .status-form-container {
-    max-width: 600px;
-    height: 200px;
+    max-width: 800px;
+    height: 250px;
     margin: 0 auto;
     margin-top: 30px;
     padding: 20px;
@@ -229,6 +231,7 @@ textarea {
     text-align: center;
     width: fit-content;
     cursor: pointer;
+    margin-top: 0;
     margin-right: 30px;
     font-family: 'Merriweather', serif;
     text-decoration: none;
@@ -250,3 +253,69 @@ textarea {
     font-size: 16px;
 }
 
+.status-img {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 15px;
+    display: flex;
+    border-radius: 8%;
+
+}
+
+.image-div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+#image-button {
+    display: flex;
+    justify-content: center;
+    margin-left: 75px;
+    margin-bottom: 6px;
+}
+
+.nav-link-update {
+    padding: 10px;
+    border-radius: 8%;
+    color: black;
+    background-color: #e7eaf6;
+    text-align: center;
+    width: fit-content;
+    cursor: pointer;
+    margin-right: 15px;
+    margin-bottom: 30px;
+    font-family: 'Merriweather', serif;
+    text-decoration: none;
+}
+
+.profile-status-container {
+    max-width: 600px;
+    height: 250px;
+    margin: 0 auto;
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+.profile-delete-container {
+    max-width: 600px;
+    height: 300px;
+    margin: 0 auto;
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.delete-div {
+    text-align: center;
+    width: 500px;
+    border-radius: 8px;
+    background-color: #ececec;
+    padding: 10px;
+}
