@@ -1,6 +1,8 @@
 from django import forms
 from .models import Profile, StatusMessage
 
+# Ieva sagaitis, ievas@bu.edu
+# Creates forms for our mini_fb project
 
 class CreateProfileForm(forms.ModelForm):
     '''A form to create Profile data.'''

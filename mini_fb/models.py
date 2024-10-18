@@ -2,6 +2,9 @@ from django.db import models
 from django.urls import reverse
 
 # Ieva sagaitis, ievas@bu.edu
+# Creates the models for our application (Profile, Status Message, Image)
+
+
 # Creates a profile model with the user's name, city, image, and email
 class Profile(models.Model):
     '''Encapsulate the data for a Profile in our application'''
