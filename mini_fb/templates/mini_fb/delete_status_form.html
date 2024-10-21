@@ -31,9 +31,16 @@ delete status message form
 
         <div class="form-actions">
             <button type="submit" class="btn btn-primary">Yes</button> <br><br>
-            <a href="{% url 'show_profile' profile.pk %}" class="nav-link-cancel">No</a>
            
         </div>
+    </form>
+
+    <form method="GET">
+
+        <div class="form-actions">
+            <a href="{% url 'show_profile' profile.pk %}" class="nav-link-cancel">No</a>
+        </div>
+           
     </form>
 </div>
 

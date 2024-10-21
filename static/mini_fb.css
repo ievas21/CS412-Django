@@ -246,7 +246,6 @@ textarea {
     vertical-align: middle;
     line-height: 1;
     background-color: #e7eaf6;
-    margin-left: 9px;
     margin-top: 12px;
     text-decoration: none;
     height: 30px;
@@ -303,7 +302,7 @@ textarea {
 
 .profile-delete-container {
     max-width: 600px;
-    height: 300px;
+    height: 350px;
     margin: 0 auto;
     margin-top: 30px;
     padding: 20px;

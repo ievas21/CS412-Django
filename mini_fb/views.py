@@ -98,7 +98,6 @@ class DeleteStatusMessageView(DeleteView):
     template_name = "mini_fb/delete_status_form.html"
 
     def get_success_url(self):
-
         return reverse('show_profile', kwargs={'pk': self.object.profile.pk})
     
     def get_context_data(self, **kwargs: Any) -> dict:
