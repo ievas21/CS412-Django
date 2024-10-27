@@ -24,7 +24,7 @@ class Profile(models.Model):
         '''Retrieve all status messages for this Profile'''
 
         # use the ORM to filter Comments where this instance of an object is the FK
-        messages = StatusMessage.objects.filter(profile=self)
+        messages = StatusMessage.objects.filter(profile=self).order_by('-timestamp')
         return messages
     
     def get_absolute_url(self):
