@@ -14,48 +14,83 @@ instances.
             <img src="{{profile.image_url}}" alt="{{profile.image_url}}">
 
             <h2>{{profile.first_name}} {{profile.last_name}}</h2> <br>
-            <h3>{{profile.city}}</h3> <br>
-            <h4>{{profile.email}}</h4> <br>
-            <a class ="nav-link-status" href="{% url 'update_profile' profile.pk %}">Update Profile</a>
-        </div>
-
-    <div class="status-message">
-        <h2>Status Messages</h2> <hr><br>
-        <!-- Call the Profile's get_status_messages() method -->
-        {% if profile.get_status_messages %}
-        {% for s in profile.get_status_messages %}
-        <div class="status-item">
-            <p>
-                {{s.message}} - {{s.timestamp}} <br><br>
-            </p>
-
-            <div class="image-div">
-            {% for img in s.get_images %}
-                <img class="status-img" src='{{img.image_file.url}}' alt='{{img.image_file.url}}'>
-            {% endfor %}
+            <div class="info-card">
+                <h3>{{profile.city}}</h3> <br>
+                <h4>{{profile.email}}</h4> <br>
             </div>
+            <a class="nav-link-status" href="{% url 'update_profile' profile.pk %}">Update Profile</a>
+            <a href="{% url 'friend_suggestions' profile.pk %}" class="nav-link-status" style="text-align: center; margin-top: 20px;">Friend Suggestions</a>
+            <a href="{% url 'news_feed' profile.pk %}" class="nav-link-status" style="text-align: center; margin-top: 20px;">News Feed</a>
+        </div>
+
+        <div class="status-message">
+            <h2>Status Messages</h2>
+            <hr><br>
+            <!-- Call the Profile's get_status_messages() method -->
+            {% if profile.get_status_messages %}
+            {% for s in profile.get_status_messages %}
+            <div class="status-item">
+                <p>
+                    {{s.message}} - {{s.timestamp}} <br><br>
+                </p>
+
+                <div class="image-div">
+                    {% for img in s.get_images %}
+                    <img class="status-img" src='{{img.image_file.url}}' alt='{{img.image_file.url}}'>
+                    {% endfor %}
+                </div>
+
+            </div>
+            <a href="{% url 'update_status' s.pk %}" class="nav-link-update">Update Message</a>
+            <a href="{% url 'delete_status' s.pk %}" class="nav-link-update">Delete Message</a> <br> <br>
+
+            <hr>
+
+            <br>
+            {% endfor %}
+
+            {% else %}
+            <div>
+                <h4>No Status Messages.</h4> <br>
+            </div>
+            {% endif %}
+
+            <br>
+            <a href="{% url 'create_status' profile.pk %}" class="nav-link-status">Create Status Message</a>
 
         </div>
-        <a href="{% url 'update_status' s.pk %}" class="nav-link-update">Update Message</a> 
-        <a href="{% url 'delete_status' s.pk %}" class="nav-link-update">Delete Message</a> <br> <br>
 
-        <hr>
+    </div>
 
-        <br>
-        {% endfor %}
+    <br><br>
 
-        {% else %}
+    <h1 style="justify-content: left; margin-left: 25px;">{{profile.first_name}}'s Friends</h1>
+    <hr style="border-color: grey; margin: 0 20px;">
+    <div class="friend-container">
+
+    {% if friends %}
+    {% for f in friends %}
+
+        <div class="friend-card">
+
+            <a href="{% url 'show_profile' f.pk %}">
+                <h3 style="text-align: center;" >{{f.first_name}} {{f.last_name}}</h3>
+            </a>
+            
+            <a href="{% url 'show_profile' f.pk %}"> 
+                <img src="{{f.image_url}}" alt="{{f.first_name}} {{f.last_name}}" class="friend-image">
+            </a>
+
+        </div>
+
+    {% endfor %}
+
+    {% else %}
         <div>
-            <h4>No Status Messages.</h4> <br>
+            <h3 style="margin-left: 20px">No Friends.</h3> <br>
         </div>
-        {% endif %}
-
-        <br>
-        <a href="{% url 'create_status' profile.pk %}" class="nav-link-status">Create Status Message</a>
-
-    </div>
-    
-    </div>
+    {% endif %}
+</div>
 </main>
 
 {% endblock %}

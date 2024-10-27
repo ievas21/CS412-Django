@@ -1,4 +1,6 @@
-from django.shortcuts import render
+from django.http import HttpRequest
+from django.http.response import HttpResponse as HttpResponse
+from django.shortcuts import render, redirect
 from .models import *
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .forms import CreateProfileForm, CreateStatusMessageForm, UpdateProfileForm, UpdateStatusMessageForm
@@ -20,6 +22,14 @@ class ShowProfilePageView(DetailView):
     model = Profile
     template_name = 'mini_fb/show_profile.html'
     context_object_name = "profile"
+
+    def get_context_data(self, **kwargs):
+
+        context = super().get_context_data(**kwargs)
+        profile = self.get_object()
+        context['friends'] = profile.get_friends()
+
+        return context
 
 class CreateProfileView(CreateView):
     '''A view to show the create profile form
@@ -109,7 +119,7 @@ class DeleteStatusMessageView(DeleteView):
         context['status_message'] = status_message  
         
         return context
-    
+     
     
 class UpdateStatusMessageView(UpdateView):
     '''A view used to update status messages.'''
@@ -131,4 +141,46 @@ class UpdateStatusMessageView(UpdateView):
 
         return context
     
+class CreateFriendView(CreateView):
+    '''A view used to create Friends'''
 
+    def dispatch(self, request, *args, **kwargs):
+
+        # get the primary keys associated with both profiles
+        pk = kwargs.get('pk')
+        other_pk = kwargs.get('other_pk')
+
+        # get the profiles
+        self_profile = Profile.objects.get(pk=pk)
+        other_profile = Profile.objects.get(pk=other_pk)
+        # create the friend relationship
+        self_profile.add_friend(other_profile)
+
+        # redirect to the self_profile
+        return redirect('show_profile', pk=self_profile.pk)
+    
+class ShowFriendSuggestionsView(DetailView):
+    model = Profile
+    template_name = "mini_fb/friend_suggestions.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        profile = self.get_object()
+        context['profile'] = profile
+        context['suggestions'] = profile.get_friend_suggestions()
+        
+        return context
+
+class ShowNewsFeedView(DetailView):
+    model = Profile
+    template_name = "mini_fb/news_feed.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        profile = self.get_object()
+        context['profiles'] = profile.get_friends()
+        context['messages'] = profile.get_news_feed()
+        
+        return context

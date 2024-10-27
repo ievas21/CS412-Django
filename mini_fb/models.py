@@ -29,8 +29,68 @@ class Profile(models.Model):
     
     def get_absolute_url(self):
         return reverse("profile", kwargs={"pk": self.pk})
-
     
+    def get_friends(self):
+        '''Retrieve all friendships for this Profile'''
+
+        friends1 = Friend.objects.filter(profile1=self)
+        friends2 = Friend.objects.filter(profile2=self)
+    
+        # set of friend ids for the Profile
+        friend_pks = set()  
+        for f in friends1:
+            friend_pks.add(f.profile2.pk) 
+
+        for f in friends2:
+            friend_pks.add(f.profile1.pk)
+
+        friends = Profile.objects.filter(pk__in=friend_pks).exclude(pk = self.pk)
+        return list(friends)
+    
+    def add_friend(self, other):
+        # check that we're not making a friend relationship for a Profile with itself
+        if (self != other):
+            friend1 = Friend.objects.filter(profile1=self, profile2=other)
+            friend2 = Friend.objects.filter(profile1=other, profile2=self)
+            # check that the friendship does not yet exist
+            if (not friend1.exists() and not friend2.exists()):
+                # create the friend relationship
+                Friend.objects.create(profile1=self, profile2=other)
+
+    def get_friend_suggestions(self):
+        pks = set()
+
+        friend1 = Friend.objects.filter(profile1=self)
+        for friend in friend1:
+            pks.add(friend.profile2.pk)
+                      
+        friend2 = Friend.objects.filter(profile2=self)
+        for friend in friend2:
+            pks.add(friend.profile1.pk)
+        
+        suggestions = Profile.objects.exclude(pk=self.pk).exclude(pk__in=pks)
+        return suggestions
+    
+    def get_news_feed(self):
+        '''Gets all status messages for the profile and the profile's friends'''
+        friend_pks = set()
+
+        friend1 = Friend.objects.filter(profile1=self)
+        for friend in friend1:
+            friend_pks.add(friend.profile2.pk)
+                      
+        friend2 = Friend.objects.filter(profile2=self)
+        for friend in friend2:
+            friend_pks.add(friend.profile1.pk)
+
+        # add the profile itself, in order to display its messages as well
+        friend_pks.add(self.pk)
+
+        # get the messages associated with the friend profiles and order by their timestamp 
+        messages = StatusMessage.objects.filter(profile_id__in=friend_pks).order_by('-timestamp')
+        
+        return messages
+
 
 class StatusMessage(models.Model):
     '''Encapsulate a status message on a profile.'''
@@ -64,5 +124,16 @@ class Image(models.Model):
     def __str__(self):
         '''Return a string representation method.'''
         return f'{self.image_file}'
+
+class Friend(models.Model):
+    '''Encapsulate two profiles that are friends with one another.'''
+    
+    profile1 = models.ForeignKey("Profile", related_name="profile1", on_delete=models.CASCADE)
+    profile2 = models.ForeignKey("Profile", related_name="profile2", on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        '''Return a string representation method.'''
+        return f'{self.profile1} & {self.profile2}'
 
 

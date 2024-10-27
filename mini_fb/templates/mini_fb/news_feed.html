@@ -1,0 +1,61 @@
+<!--This is the html file that shows all status messages for
+a profile (and their friends)
+-->
+
+<!--Ieva sagaitis, ievas@bu.edu -->
+
+{% extends 'mini_fb/base.html' %}
+
+{% block content %}
+
+<main>
+    <div>
+        <h1 style="justify-content: left; margin-left: 25px;">{{ profile.first_name }}'s News Feed</h1>
+        <hr style="border-color: grey; margin: 0 20px;"> 
+
+        <br><br>
+
+        <div class="status-message" style="margin: 0 auto;">
+            <br>
+            {% if messages %}
+            {% for s in messages %}
+            <div class="status-card">
+                <p> 
+                    <img class="status-profile-img" src="{{ s.profile.image_url }}" alt="{{ s.profile.first_name }} {{ s.profile.last_name }}">
+                    {{s.profile.first_name}} {{s.profile.last_name}} - {{s.timestamp}} <br><br>
+                </p>
+
+                <p>
+                    {{s.message}}<br>
+                </p>
+
+                <br>
+
+                <div class="image-div">
+                    {% for img in s.get_images %}
+                    <img class="status-img" src='{{img.image_file.url}}' alt='{{img.image_file.url}}'>
+                    {% endfor %}
+                </div>
+
+            </div>
+            <br><br>
+            {% endfor %}
+
+            {% else %}
+            <div class="nav-link-go-back-cont"> <br>
+                <p style="margin-left: 20px;">No status messages.</p>
+            </div>
+            <br>
+            {% endif %}
+
+            <div class="nav-link-go-back-cont">
+                <a href="{% url 'show_profile' profile.pk %}" class="nav-link-go-back">Go Back To {{ profile.first_name }}'s Profile</a>
+            </div>
+
+        </div>
+
+        <br><br>
+    </div>
+</main>
+
+{% endblock %}
