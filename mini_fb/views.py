@@ -83,7 +83,8 @@ class CreateStatusMessageView(LoginRequiredMixin, CreateView):
         return reverse('login')
 
     def get_success_url(self):
-        return reverse('show_profile', kwargs={'pk': self.request.user.profile.pk})
+        profile = Profile.objects.get(user=self.request.user)
+        return reverse('show_profile', kwargs={'pk': profile.pk})
     
     def form_valid(self, form):
         # Assign the profile to the status message based on the URL's pk
