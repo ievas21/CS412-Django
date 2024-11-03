@@ -1,12 +1,16 @@
 from django.forms import BaseModelForm
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import *
 from .forms import *
 from django.views.generic import ListView, DetailView, CreateView
 import random
 from django.urls import reverse
 from typing import Any
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+from django.contrib.auth import login
 
 # Create your views here.
 class ShowAllView(ListView):
@@ -15,6 +19,13 @@ class ShowAllView(ListView):
     model = Article
     template_name ='blog/show_all.html'
     context_object_name = 'articles'
+
+    def dispatch(self, request):
+        '''add this method to show/debug logged in user'''
+        print(f"Logged in user: request.user={request.user}")
+        print(f"Logged in user: request.user.is_authenticated={request.user.is_authenticated}")
+        return super().dispatch(request)
+    
 
 class RandomArticleView(DetailView):
     '''Pick one random article and show it'''
@@ -37,7 +48,7 @@ class ArticleView(DetailView):
     template_name = 'blog/article.html'
     context_object_name = "article"
 
-class CreateCommentView(CreateView):
+class CreateCommentView(LoginRequiredMixin, CreateView):
     '''A view to show the creare comment form
         on GET: it sends back the form
         on POST: read the form data, create an instance of Comment; save to the database
@@ -79,7 +90,7 @@ class CreateCommentView(CreateView):
         return context
     
 
-class CreateArticleView(CreateView):
+class CreateArticleView(LoginRequiredMixin, CreateView):
     '''View to create a new Article instance.'''
 
     form_class = CreateArticleForm
@@ -88,9 +99,50 @@ class CreateArticleView(CreateView):
     def form_valid(self, form):
         '''Add some debugging statements.'''
         print(f'CreateArticleView.form_valid: form.cleaned_data={form.cleaned_data}')
-
+        # find which user is logged in
+        user = self.request.user
+        # attach the user to the new article instance
+        form.instance.user = user
         # delegate work to the super class
         return super().form_valid(form)
+    
+    def get_login_url(self) -> str:
+        '''Return the URL that is required for login.'''
+        return reverse('login')
+    
+
+class RegistrationView(CreateView):
+    '''Display and process the UserCreationForm for account registration'''
+
+    template_name ='blog/register.html'
+    form_class = UserCreationForm
+
+    def dispatch(self, *args, **kwargs):
+        '''Handle the User creation process.'''
+
+        # we handle the HTTP POST request
+        if self.request.POST:
+ 
+            # reconstruct the UserCreationForm from the HTTP POST
+            form =UserCreationForm(self.request.POST)
+            print(f'Form={form}')
+
+            if not form.is_valid():
+                return super().dispatch(*args, **kwargs)
+
+            # save the new User object -- creates a new instance of the User object in the database
+            user = form.save() 
+
+            # login the User
+            login(self.request, user)
+
+            ## mini_fb note: take the user and attatch it to Profile creation form before saving
+
+            # re-direct to some page view
+            return redirect(reverse('show_all'))
+
+        # let the default superclass CreateView handle the HTTP GET
+        return super().dispatch(*args, **kwargs)
 
     
  

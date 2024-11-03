@@ -18,9 +18,11 @@ instances.
                 <h3>{{profile.city}}</h3> <br>
                 <h4>{{profile.email}}</h4> <br>
             </div>
-            <a class="nav-link-status" href="{% url 'update_profile' profile.pk %}">Update Profile</a>
-            <a href="{% url 'friend_suggestions' profile.pk %}" class="nav-link-status" style="text-align: center; margin-top: 20px;">Friend Suggestions</a>
-            <a href="{% url 'news_feed' profile.pk %}" class="nav-link-status" style="text-align: center; margin-top: 20px;">News Feed</a>
+            {% if request.user.is_authenticated and request.user == profile.user %}
+            <a class="nav-link-status" href="{% url 'update_profile' %}">Update Profile</a>
+            <a href="{% url 'friend_suggestions'  %}" class="nav-link-status" style="text-align: center; margin-top: 20px;">Friend Suggestions</a>
+            <a href="{% url 'news_feed' %}" class="nav-link-status" style="text-align: center; margin-top: 20px;">News Feed</a>
+            {% endif %}
         </div>
 
         <div class="status-message">
@@ -41,8 +43,10 @@ instances.
                 </div>
 
             </div>
+            {% if request.user.is_authenticated and request.user == profile.user %}
             <a href="{% url 'update_status' s.pk %}" class="nav-link-update">Update Message</a>
-            <a href="{% url 'delete_status' s.pk %}" class="nav-link-update">Delete Message</a> <br> <br>
+            <a href="{% url 'delete_status' s.pk %}" class="nav-link-update">Delete Message</a> <br><br>
+            {% endif %} 
 
             <hr>
 
@@ -55,8 +59,10 @@ instances.
             </div>
             {% endif %}
 
-            <br>
-            <a href="{% url 'create_status' profile.pk %}" class="nav-link-status">Create Status Message</a>
+            {% if request.user.is_authenticated and request.user == profile.user %}
+                <br>
+                <a href="{% url 'create_status' %}" class="nav-link-status">Create Status Message</a>
+            {% endif %}
 
         </div>
 

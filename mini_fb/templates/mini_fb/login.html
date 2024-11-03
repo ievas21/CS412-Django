@@ -1,0 +1,32 @@
+
+{% extends 'mini_fb/base.html' %}
+{% block content %}
+
+<!--Ieva sagaitis, ievas@bu.edu -->
+
+<!-- This basic authentication form works.
+- need to set "next" to redirect to correct page.
+-->
+<br>
+<hr style="border: 0.5px solid black; width: 90%; margin: 0 auto;">
+<h1>Login Into Account</h1>
+<br>
+<div style="margin: 0 auto; text-align: center;">
+<form method="post" action="{% url 'login' %}" >
+    {% csrf_token %}
+    {{form}}
+    {% if request.GET.next %}
+    <input type="hidden" name="next" value="{{request.GET.next}}">
+    {% else %}
+    <input type="hidden" name="next" value="{% url 'show_all_profiles' %}">
+    {% endif %}
+    <br>
+    <input type="submit" value="Login" style="display: block; margin: 0 auto;  background-color: #e7eaf6; padding: 7px; width: 100px; text-align: center; border-radius: 5%; font-family: 'Merriweather', serif; font-size: 16px; border: none;">
+</form>
+</div>
+
+<br> 
+
+<hr style="border: 0.5px solid black; width: 90%; margin: 0 auto;">
+
+{% endblock %}

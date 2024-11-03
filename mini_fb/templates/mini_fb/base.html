@@ -8,7 +8,7 @@ Put common code here, specific code in separate pages
 <html>
     <head>
         <title>Mini Facebook</title>
-        <link rel="stylesheet" href="https://cs-people.bu.edu/ievas/a08/mini_fb.css">
+        <link rel="stylesheet" href="{% static 'mini_fb.css' %}"">
     </head>
     <body>
 
@@ -16,10 +16,36 @@ Put common code here, specific code in separate pages
         <nav>
             <ul>
                 <a href="{% url 'show_all_profiles' %}" id="nav-link">All Profiles</a>
-                <a href="{% url 'create_profile' %}" id="nav-link">Create Profile</a>
+                <!--<a href="{% url 'create_profile' %}" id="nav-link">Create Profile</a>-->
+
+                {% if request.user.is_authenticated%}
+                <!--<a href="{% url 'create_profile' %}" id="nav-link">Create Profile</a>-->
+                <a href="{% url 'show_profile' request.user.profile.pk %}"  id="nav-link">My Profile</a>
+                <br><br>
+                <div style="margin: 0 auto;">
+                    <form method="POST" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <input type="submit" value="Logout" style="display: block; margin: 0 auto;  background-color: #e7eaf6; padding: 7px; width: 50%; text-align: center; border-radius: 5%; font-family: 'Merriweather', serif; font-size: 16px; border: none;">
+                    </form>
+                </div>
+                {% else %}
+                <a href="{% url 'create_profile' %}" id="nav-link">Create New Profile</a>
+                <a href="{% url 'login' %}" id="nav-link">Login</a>
+                
+                {% endif %}
+
             </ul>
         </nav>
-    
+
+        <br>
+        <p style="margin: 0 auto; background-color: #e7eaf6; padding: 10px; width: 20%; text-align: center; border-radius: 5%;">
+            {% if request.user.is_authenticated %}
+            Logged in user: {{ request.user }}
+            {% else %}
+            Not Logged In
+            {% endif %}
+        </p>
+
         {% block content %}
         
         {% endblock %}    
