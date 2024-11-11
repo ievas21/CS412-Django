@@ -1,0 +1,78 @@
+<!--Ieva sagaitis, ievas@bu.edu -->
+<br>
+<form method="GET" action="{% url 'voters' %}">
+
+    <div class="form-col">
+
+    
+    <div class="form-group">
+    <label for="party_affiliation">Party Affiliation:</label>
+    <select name="party_affiliation" id="party_affiliation">
+        <option value="">Any</option>
+        <option value="D">Democratic</option>
+        <option value="R">Republican</option>
+        <option value="CC">Constitution Party</option>
+        <option value="L">Libertarian Party</option>
+        <option value="T">Tea Party</option>
+        <option value="O">Other</option>
+        <option value="G">Green Party</option>
+        <option value= "J">Independent Party</option>
+        <option value="Q">Reform Party</option>
+        <option value="FF">Freedom Party</option>
+    </select>
+    </div>
+
+    <div class="form-group">
+    <label for="min_dob">Minimum Date of Birth:</label>
+    <select name="min_dob" id="min_dob">
+        <option value="">Any</option>
+        {% for year in years %}
+            <option value="{{ year }}">{{ year }}</option>
+        {% endfor %}
+    </select>
+    </div>
+
+
+    <div class="form-group">
+    <label for="max_dob">Maximum Date of Birth:</label>
+    <select name="max_dob" id="max_dob">
+        <option value="">Any</option>
+        {% for year in years %}
+            <option value="{{ year }}">{{ year }}</option>
+        {% endfor %}
+    </select>
+    </div>  
+
+
+    <div class="form-group">
+    <label for="voter_score">Voter Score:</label>
+    <select name="voter_score" id="voter_score">
+        <option value="">Any</option>
+        {% for score in scores %}
+            <option value="{{ score }}">{{ score }}</option>
+        {% endfor %}
+    </select>
+    </div>  
+
+    </div>
+
+    <br><br>
+
+    <div class="form-col" style="display:flex; justify-content: center; align-items: center;">
+
+    <fieldset>
+        <legend>Voted in Specific Elections:</legend>
+        <label><input type="checkbox" name="elections" value="v20state">2020 State</label>
+        <label><input type="checkbox" name="elections" value="v21town">2021 Town</label>
+        <label><input type="checkbox" name="elections" value="v21primary">2021 Primary</label>
+        <label><input type="checkbox" name="elections" value="v22general">2022 General</label>
+        <label><input type="checkbox" name="elections" value="v23town">2023 Town</label>
+    </fieldset>
+
+    </div>
+
+    <br>
+
+    <button type="submit" style="display: block; margin: 0 auto;  background-color: white; padding: 8px; text-align: center; border-radius: 8%; font-size: 16px; border: none; cursor: pointer; width: 170px;">Search</button>
+    <br>
+</form>

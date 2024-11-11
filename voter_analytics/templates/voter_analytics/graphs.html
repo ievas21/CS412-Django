@@ -1,0 +1,37 @@
+<!--Ieva sagaitis, ievas@bu.edu -->
+
+{% extends 'voter_analytics/base.html' %}
+{% block content %}
+
+<div class="container">
+
+    <h2>Filter Voters</h2>
+
+    <hr>
+
+    <div class="row">
+        {% include 'voter_analytics/graph_search.html' %}    
+    </div>
+</div>
+
+<div class="container">    
+
+    <div>
+        {{ birth_graph_div|safe }}
+    </div>
+
+    <br>
+
+    <div>
+        {{ pie_chart|safe }}
+    </div>
+
+    <br>
+
+    <div>
+        {{ histogram|safe }}
+    </div>
+
+</div>
+
+{% endblock %}

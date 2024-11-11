@@ -1,0 +1,83 @@
+<!--Ieva sagaitis, ievas@bu.edu -->
+{% extends 'voter_analytics/base.html' %}
+{% block content %}
+
+<div class="container">
+
+    <h1>Voter Details</h1>
+    <a href="{% url 'voters' %}" style="display: block; margin: 0 auto;  background-color: white; padding: 8px; text-align: center; border-radius: 8%; font-size: 16px; border: none; cursor: pointer; min-width: 250px;">Back to All Voters</a>
+
+    <br><br>
+
+    <div class="row">
+        <table class="detail_table">
+            <tr>
+                <th>Voter Id</th>
+                <th style="min-width: 100px;">Name</th>
+                <th style="min-width: 100px;">Address</th>
+                <th>Date of Birth</th>
+                <th>Date of Registration</th>
+                <th>Party Affiliation</th>
+                <th>Precinct Number</th>
+                <th>Voter Score</th>
+            </tr>
+    
+            <tr>
+                <td>{{r.voter_id}}</td>
+                <td>{{r.first_name}} {{r.last_name}}</td>
+
+                <td>
+                    {{r.street_number}} {{r.street_name}},
+                    {% if r.apartment_number %} 
+                       Apt {{r.apartment_number}},
+                    {% endif %}
+                    {{r.zip_code}}
+                </td>
+
+                <td>{{r.dob}}</td>
+                <td>{{r.registration_date}}</td>
+                <td>{{r.party_affiliation}}</td>
+                <td>{{r.precinct_number}}</td>
+                <td>{{r.voter_score}}</td>
+                
+            </tr>
+    
+        </table>
+
+        <br><br>
+
+        <a href="https://www.google.com/maps/search/?api=1&query={{r.street_number}}+{{r.street_name}}+{{r.zip_code}}" target="_blank" style="display: block; margin: 0 auto;  background-color: white; padding: 8px; text-align: center; border-radius: 8%; font-size: 16px; border: none; cursor: pointer; min-width: 250px;">
+            View Address on Google Maps
+        </a>
+
+        </div>
+
+    </div>
+
+        <div class="container" style="font-size: 15px;">
+
+            <h2 style="display: block; text-align: center; margin-left: 30px">Voting History</h2>
+            <hr>
+            <br>
+
+            <table class="detail_table" style="display:flex; justify-content: center; align-items: center; max-width: 1400px; margin-left: 50px;">
+                <tr style="font-size: 15px;">
+                    <th>2020 State</th>
+                    <th>2021 Town</th>
+                    <th>2021 Primary</th>
+                    <th>2022 General</th>
+                    <th>2023 Town</th>
+                </tr>
+        
+                <tr>
+                    <td>{{r.v20state}}</td>
+                    <td>{{r.v21town}}</td>
+                    <td>{{r.v21primary}}</td>
+                    <td>{{r.v22general}}</td>
+                    <td>{{r.v23town}}</td>
+                </tr>
+
+        </div>  
+
+    
+{% endblock %}

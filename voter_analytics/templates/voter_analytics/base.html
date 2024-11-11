@@ -1,0 +1,25 @@
+
+<!--Ieva sagaitis, ievas@bu.edu -->
+
+{% load static %}
+<html>
+    <head>
+        <title>Voter Analytics</title>
+        <link rel="stylesheet" href="{% static 'stylesheet.css' %}">
+    </head>
+    <body>
+        <header>
+            <h1 id="head-title">Voter Analytics</h1>
+            <nav>
+                <ul class="nav-list">
+                    <li><a href="{% url 'home' %}">All Voters</a></li>
+                    <li><a href="{% url 'graphs' %}">Graphs</a></li>
+                </ul>
+            </nav>
+        </header>
+    
+    {% block content %}
+    {% endblock %}    
+  
+    </body>
+</html>
