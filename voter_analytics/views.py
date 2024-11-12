@@ -54,6 +54,7 @@ class VotersListView(ListView):
 
         if elections:
             for election in elections:
+                # builds a filter based on the current election field (e.g. v20state, v23town , etc)
                 qs = qs.filter(**{election: True})
 
         return qs
@@ -64,7 +65,7 @@ class VotersListView(ListView):
         context['scores'] = range(1, 6)
 
         current_year = timezone.now().year
-        context['years'] = range(1924, current_year + 1)
+        context['years'] = range(1913, current_year + 1)
         
         return context
     
@@ -107,6 +108,7 @@ class GraphListView(ListView):
 
         if elections:
             for election in elections:
+                # builds a filter based on the current election field (e.g. v20state, v23town , etc)
                 qs = qs.filter(**{election: True})
 
         return qs
@@ -120,9 +122,10 @@ class GraphListView(ListView):
         current_year = timezone.now().year
         context['years'] = range(1924, current_year + 1)
 
-        filtered_voters = self.get_queryset()
+        voters = self.get_queryset()
 
-        voter_data = filtered_voters.values('dob__year').annotate(count=Count('id')).order_by('dob__year')
+        # count how many voters exist for each birth year 
+        voter_data = voters.values('dob__year').annotate(count=Count('id')).order_by('dob__year')
 
         # build the graph
         x = [entry['dob__year'] for entry in voter_data]
@@ -138,39 +141,54 @@ class GraphListView(ListView):
             yaxis_title="Number of Voters",
         )
 
-        graph_div = plotly.offline.plot(fig, auto_open=False, output_type="div")
+        graph_div = plotly.offline.plot(fig, 
+                                        auto_open=False, 
+                                        output_type="div")
 
         # add the graph to the context
         context['birth_graph_div'] = graph_div
 
-        party_data = filtered_voters.values('party_affiliation').annotate(count=Count('id'))
+
+        # count the number of voters in each political party
+        party_data = voters.values('party_affiliation').annotate(count=Count('id'))
         labels = [entry['party_affiliation'] for entry in party_data]
         values = [entry['count'] for entry in party_data]
 
         fig_pie = go.Figure(data=[go.Pie(labels=labels, values=values)])
+
         fig_pie.update_layout(
             title=f"Voter Distribution by Party Affiliation (n={total_voters})"
         )
 
-        pie_chart = plotly.offline.plot(fig_pie, auto_open=False, output_type="div")
+        pie_chart = plotly.offline.plot(fig_pie, 
+                                        auto_open=False, 
+                                        output_type="div")
+        
         context['pie_chart'] = pie_chart
 
         election_labels = []
         election_counts = []
 
         for field, label in elections.items():
-            count = filtered_voters.filter(**{field: True}).count()
+            # count the number of voters who voted in each election
+            count = voters.filter(**{field: True}).count()
+            # name of each election
             election_labels.append(label)
+            # how many people voted in each specific election (stored matching with each corresponding label)
             election_counts.append(count)
 
-        fig_election = go.Figure(data=[go.Bar(x=election_labels, y=election_counts)])
-        fig_election.update_layout(
+        fig_elect = go.Figure(data=[go.Bar(x=election_labels, y=election_counts)])
+
+        fig_elect.update_layout(
             title=f"Voter Count by Election (n={total_voters})",
             xaxis_title="Election",
             yaxis_title="Number of Voters",
         )
 
-        histogram = plotly.offline.plot(fig_election, auto_open=False, output_type="div")
+        histogram = plotly.offline.plot(fig_elect, 
+                                        auto_open=False, 
+                                        output_type="div")
+        
         context['histogram'] = histogram
 
         return context
