@@ -1,0 +1,57 @@
+
+<!--Ieva sagaitis, ievas@bu.edu -->
+
+{% extends 'project/base.html' %}
+{% block content %}
+<br><br>
+<div class="book-container">
+    <div class="book-detail-header">
+        <h2 style="margin: 0 auto; text-align: center;"><b>{{book.title}}</b> - <b>{{book.author}}</b></h2>
+    </div>
+        <div class="book-detail">
+            <img src="{{book.image_url}}" alt="{{book.title}} cover image.">
+            <div style="display: block; align-items: center; text-align: center;">
+                <p style="text-align:left;">
+                    <b>Book Description</b>: {{book.description}}
+                </p>
+
+                <p style="text-align: center; margin-top: 20px;">
+                    <b>Average Rating:</b> {{book.score}} (From {{book.num_ratings}} total ratings)
+                </p>
+
+                <p style="text-align: center; margin-top: 20px;">
+                    <b>Published:</b> {{book.yr_published}} 
+                </p>
+                <br>
+                <a href="https://www.amazon.com/s?k={{book.title}} - {{book.author}}" target="_blank" style="margin-right: 30px;" class="add-to-list">Find On Amazon</a>
+                <a href="{% url 'book_reviews' book.pk %}" class="add-to-list" style="margin-right: 30px;">Community Reviews</a>
+                {% if request.user.is_authenticated %}
+                <a href="{% url 'create_review' book.pk %}" class="add-to-list">Add A Review</a>
+                {% endif %}
+                <br><br><br>
+
+                {% if request.user.is_authenticated %}
+                <form method="POST">
+                    {% csrf_token %}
+                    {% if not already_in_list %}
+                    <button type="submit" class="add-to-list" name="add_to_list" style="display: inline; justify-content: center; align-items: center; margin: 0 auto; background-color: #eddfcc; padding: 7px; width: 300px; text-align: center; border-radius: 12px; font-family: Georgia, 'Times New Roman', Times, serif; font-size: 1.1em; border: 1px solid black; height: 45px;">
+                        Add to To-Read List
+                    </button>
+                    {% endif %}
+
+                    {% if not is_currently_marked_reading %}
+                    <button type="submit" class="add-to-list" name="mark_as_currently_reading" style="display: inline; justify-content: center; align-items: center; margin: 0 auto; background-color: #eddfcc; padding: 7px; width: 300px; text-align: center; border-radius: 12px; font-family: Georgia, 'Times New Roman', Times, serif; font-size: 1.1em; border: 1px solid black; height: 45px;">
+                        Add As Currently Reading
+                    </button>
+                    {% endif %}
+                </form>
+                {% endif %}
+
+            </div>
+        </div>
+</div>
+
+<br><br>
+
+{% endblock %}
+    

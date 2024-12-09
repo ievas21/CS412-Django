@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'blog', # in -class exmaple
     'mini_fb', # hw5 app
     'marathon_analytics', # in-class example
-    'voter_analytics' # hw10
+    'voter_analytics', # hw10
+    'project' # final project
 ]
 
 MIDDLEWARE = [

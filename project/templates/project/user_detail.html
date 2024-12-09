@@ -1,0 +1,158 @@
+
+<!--Ieva sagaitis, ievas@bu.edu -->
+
+{% extends 'project/base.html' %}
+{% block content %}
+<br><br>
+
+<div class="reviews-and-profile">
+
+    <div class="profile-detail-container">
+        <h1>{{user.first_name}} {{user.last_name}}</h1>
+        <hr>
+        <br>
+            <div class="book-grid">
+                    <div class="profile-card-detail">
+                        <img src="{{user.image_url}}" alt="Picture of {{user.first_name}} {{user.last_name}}">
+                        <br><br>
+                        {% if request.user.is_authenticated and request.user == user.user %}
+                        <form method="POST" action="{% url 'logout' %}">
+                            {% csrf_token %}
+                            <input type="submit" value="Logout" class="login-input" style="display: flex; justify-content: center; align-items: center; margin: 0 auto;  background-color: #eddfcc; padding: 7px; width: 100px; text-align: center; border-radius: 12px; font-family: Georgia, 'Times New Roman', Times, serif; font-size: 16px; border: 1px solid black;">
+                        </form>
+                        <a href="{% url 'friend_suggest' %}" class="login-input" style="display: flex; justify-content: center; align-items: center; margin: 0 auto;  background-color: #eddfcc; padding: 7px; width: 100px; text-align: center; border-radius: 12px; font-family: Georgia, 'Times New Roman', Times, serif; font-size: 16px; border: 1px solid black; text-decoration: none; color: #222">
+                            Add Friends
+                        </a>
+                        {% endif %}
+                    </div>
+            </div>
+            <br>
+            <hr>
+
+            <div class="profile-detail-book-container">
+                {% if user.currently_reading %}
+                    <h2><b>Currently Reading:</b> {{user.currently_reading.title}} by {{user.currently_reading.author}}</h2>
+                    <br>
+                    <img src="{{user.currently_reading.image_url}}" alt="Picture of {{user.currently_reading.title}} cover." style="width: 50%">
+                {% else %}
+                <h2><b>Currently Reading:</b> No Book Selected</h2>
+                {% endif %}
+            </div>
+    </div>
+
+    <div class="profile-reviews-container">
+        <h2 style="font-size: 2.2em;">{{user.first_name}}'s Reviews</h2>
+        <hr>
+        <br>
+        {% if reviews %}
+            {% for r in user.get_reviews %}
+                <div class="review">
+                    <div class="review-header">
+                        <img class="review-profile-img" src={{user.image_url}} alt="{{ user.first_name }}">
+                        <a href="{% url 'book_detail' r.book.pk %}" style="text-decoration: none;">
+                            <h3 style="text-align: left;" ><b>{{r.book}}</b></h3>
+                        </a>
+                    </div>
+                    <hr>
+                    <div style="text-align: left; font-size: 17px; color: #222">
+                        Rating:
+                        {% for i in "12345" %}
+                            {% if forloop.counter <= r.rating %}
+                            <span class="star filled"">&#9733;</span>
+                            {% else %}
+                            <span class="star">&#9734;</span>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <br>
+                        <p style="text-align: left;">
+                            {{r.review}} - {{r.timestamp}}
+                        </p> 
+                        <br>
+                    {% if request.user.is_authenticated and request.user == user.user %}
+                    <div class="user-btns">
+                        <a href="{% url 'update_review' r.pk %}" class="go-back" style="font-size: 1em; margin-right: 20px;">
+                            <i class="fa-solid fa-pencil"></i>
+                        </a>
+                        <a href="{% url 'delete_review' r.pk %}" class="go-back" style="font-size: 1em">
+                            <i class="fa-solid fa-trash"></i>
+                        </a>
+                    </div>
+                    {% endif %}
+                      
+                </div>
+                <br>
+        
+            {% endfor %}
+
+        {% else %}
+            <div>
+                <h3 style="margin-left: 20px">No Reviews.</h3> <br>
+            </div>
+        {% endif %}
+        <hr>
+        <br>
+
+    </div>
+</div>
+
+<br><br>
+
+
+<div class="friends-container">
+    <h2 style="font-size: 2.2em; text-align: center;">{{user.first_name}}'s To-Read List</h2>
+    <hr>
+    <br>
+    {% if book_list %}
+    <div class="friend-grid">
+        {% for b in book_list %}
+            <div class="book-card">
+                <a href="{% url 'book_detail' b.book.pk %}" style="text-decoration: none;">
+                    <img src="{{b.book.image_url}}" alt="{{b.book.title}} - {{b.book.author}}">
+                    <h3 style="text-align: center; font-size: 1.1em;" ><b>{{b.book.title}}</b></h3>
+                </a>
+            </div>
+    
+        {% endfor %}
+        </div>
+
+    {% else %}
+        <div>
+            <h3 style="margin-left: 20px">No Books.</h3> <br>
+        </div>
+    {% endif %}
+
+</div>
+<br><br>
+
+<div class="friends-container">
+    <h2 style="font-size: 2.2em; text-align: center;">{{user.first_name}}'s Friends</h2>
+    <hr>
+    <br>
+    {% if friends %}
+    <div class="friend-grid">
+        {% for f in friends %}
+            <div class="friend-card">
+                <a href="{% url 'user_detail' f.pk %}" style="text-decoration: none;">
+                    <h3 style="text-align: center;" >{{f.first_name}} {{f.last_name}}</h3>
+                </a>
+                
+                <a href="{% url 'user_detail' f.pk %}" style="text-decoration: none;"> 
+                    <img src="{{f.image_url}}" alt="{{f.first_name}} {{f.last_name}}" style="height: 200px; width: 200px;">
+                </a>
+
+            </div>
+    
+        {% endfor %}
+    </div>
+
+    {% else %}
+        <div>
+            <h3 style="margin-left: 20px">No Friends.</h3> <br>
+        </div>
+    {% endif %}
+
+</div>
+<br><br>
+
+{% endblock %}

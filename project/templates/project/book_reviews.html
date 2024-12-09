@@ -1,0 +1,55 @@
+<!--Ieva sagaitis, ievas@bu.edu -->
+
+{% extends 'project/base.html' %}
+{% block content %}
+<br><br>
+
+<div class="book-container" style="width: 1100px;">
+    <div class="book-detail-header" style="width: 80%; margin: 0 auto; text-align: center; padding-top: 15px;">
+        <h2 style="font-size: 1.3em;">Community Reviews For <b>{{book.title}}</b></h2>
+    </div>
+    <br>
+    <div class="review">
+        {% if reviews %}
+        {% for r in reviews %}
+        <div class="review-card" style="text-align: left;">
+            <div class="review-header">
+                <img class="review-profile-img" src={{r.person.image_url}} alt="{{ r.person }}">
+                    <h2 style="text-align: center; font-size: 1.15em"><b>{{r.person}}</b></h2>
+            </div>
+            <div style="text-align: left; font-size: 17px; color: #222">
+                Rating:
+                {% for i in "12345" %}
+                    {% if forloop.counter <= r.rating %}
+                    <span class="star filled"">&#9733;</span>
+                    {% else %}
+                    <span class="star">&#9734;</span>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <br>
+            <p>
+                {{r.review}} - {{r.timestamp}}
+            </p>
+
+        </div>
+        <br>
+
+        {% endfor %}
+
+
+    </div>
+    {% else %}
+    <div>
+        <h3 style="margin-right: 10px; font-size: 1.2em;">No Reviews.</h3>
+    </div>
+    {% endif %}
+    <br>
+    <div class="go-back-btn-div">
+        <a href="{% url 'book_detail' book.pk %}" class="go-back" style="font-size: 0.9em;">
+            <i class="fa-solid fa-arrow-left"> Go Back</i>
+        </a>
+    </div>
+</div>
+
+{% endblock %}

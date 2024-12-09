@@ -1,0 +1,29 @@
+
+<!--Ieva sagaitis, ievas@bu.edu -->
+
+{% extends 'project/base.html' %}
+{% block content %}
+
+<div>
+    <br><br>
+        <div class="profile-grid" style="margin: 0 20px;">
+            {% for r in results %}
+
+                <div class="profile-card">
+                    <a href="{%url 'user_detail' r.pk %}"> 
+                        <img src="{{r.image_url}}" alt="Picture of{{r.first_name}} {{r.last_name}}.">
+                    </a>
+                    
+                    <br>
+
+                    <a href="{%url 'user_detail' r.pk %}" style="text-decoration: none"> 
+                        <h2>{{r.first_name}} {{r.last_name}}</h2>
+                    </a>
+                </div>
+
+            {% endfor %}
+        </div>
+        <br><br>
+</div>
+
+{% endblock %}

@@ -1,0 +1,125 @@
+
+<!--Ieva sagaitis, ievas@bu.edu -->
+
+{% extends 'project/base.html' %}
+
+{% block content %}
+
+<br>
+
+<h2 id="statistics-title"><b>Top-Rated Books From 2024</b></h2>
+<hr style="width: 40%; color: black; border: 1px solid black;">
+<br>
+<div>
+    <div class="book-grid">
+    {% for book in top_2024 %}
+    <div class="book-card">
+        <div class="book-card-image">
+            <a href="{%url 'book_detail' book.pk %}" style="text-decoration: none"> 
+                <img src="{{book.image_url}}" alt="{{r.title}} cover image">
+            </a>
+        </div>
+
+        <div class="book-card-content">
+            <a href="{% url 'book_detail' book.pk %}" style="text-decoration: none; margin-bottom: 5px;"> 
+                <h4>{{book.title}}</h4>
+            </a>
+            <h5 style="text-decoration: none; margin-bottom: 5px;">{{book.author}}</h5>
+            <h5>Rating: {{book.score}}</h5>
+        </div>
+    </div>
+    {% endfor %}
+    </div>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+
+<h2 id="statistics-title"><b>Most Reviewed Books</b></h2>
+<hr style="width: 40%; color: black; border: 1px solid black;">
+<br>
+    <div class="book-grid">
+            {% for book in most_reviewed %}
+            <div class="book-card">
+                <div class="book-card-image">
+                    <a href="{%url 'book_detail' book.pk %}" style="text-decoration: none"> 
+                        <img src="{{book.image_url}}" alt="{{r.title}} cover image">
+                    </a>
+                </div>
+
+                <div class="book-card-content">
+                    <a href="{% url 'book_detail' book.pk %}" style="text-decoration: none; margin-bottom: 5px;"> 
+                        <h4>{{book.title}}</h4>
+                    </a>
+                    <h5 style="text-decoration: none; margin-bottom: 5px;">{{book.author}}</h5>
+                    <h5>{{book.num_ratings}} ratings</h5>
+                </div>
+            </div>
+                {% endfor %}
+    </div>
+<br>
+<br>
+<br>
+<br>
+
+<h2 id="statistics-title"><b>Most Shelved Books</b></h2>
+<hr style="width: 40%; color: black; border: 1px solid black;">
+<br>
+<div>
+    <div class="book-grid">
+    {% for book in most_shelved %}
+    <div class="book-card">
+        <div class="book-card-image">
+            <a href="{%url 'book_detail' book.pk %}" style="text-decoration: none"> 
+                <img src="{{book.image_url}}" alt="{{r.title}} cover image">
+            </a>
+        </div>
+
+        <div class="book-card-content">
+            <a href="{% url 'book_detail' book.pk %}" style="text-decoration: none; margin-bottom: 5px;"> 
+                <h4>{{book.title}}</h4>
+            </a>
+            <h5 style="text-decoration: none; margin-bottom: 5px;">{{book.author}}</h5>
+            <h5>{{book.num_shelvings}} shelvings</h5>
+        </div>
+    </div>
+    {% endfor %}
+    </div>
+</div>
+
+<br>
+<br>
+<br>
+
+<h2 id="statistics-title"><b>Worst-Rated Books From 2024</b></h2>
+<hr style="width: 40%; color: black; border: 1px solid black;">
+<br>
+<div>
+    <div class="book-grid">
+    {% for book in worst %}
+    <div class="book-card">
+        <div class="book-card-image">
+            <a href="{%url 'book_detail' book.pk %}" style="text-decoration: none"> 
+                <img src="{{book.image_url}}" alt="{{r.title}} cover image">
+            </a>
+        </div>
+
+        <div class="book-card-content">
+            <a href="{% url 'book_detail' book.pk %}" style="text-decoration: none; margin-bottom: 5px;"> 
+                <h4>{{book.title}}</h4>
+            </a>
+            <h5 style="text-decoration: none; margin-bottom: 5px;">{{book.author}}</h5>
+            <h5>Rating: {{book.score}}</h5>
+        </div>
+    </div>
+    {% endfor %}
+    </div>
+</div>
+
+<br>
+<br>
+<br>
+
+{% endblock %}

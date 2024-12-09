@@ -1,0 +1,53 @@
+
+<!--Ieva sagaitis, ievas@bu.edu -->
+
+{% extends 'project/base.html' %}
+{% block content %}
+<br>
+<div class="book-container" style="width: 1220px;">
+    <div style="display: flex; justify-content: center; align-items: center;">
+        <h2 style="font-size: 2.2em;">Your Feed</h2>
+    </div>
+    <hr style="width: 30%; color: #222; border: 1px solid #222;">
+    <br>
+    {% if feed %}
+        {% for r in feed %}
+            <div class="feed-div">
+                <div class="review-header">
+                    <img class="review-profile-img" src={{r.person.image_url}} alt="{{ r.person.first_name }}">
+                    <a href="{% url 'book_detail' r.book.pk %}" style="text-decoration: none;">
+                        <h3 style="text-align: center;" ><b>{{r.book}}</b> - {{r.person.first_name}} {{r.person.last_name}} </h3>
+                    </a>
+                </div>
+                <hr>
+                <div style="text-align: left; font-size: 17px; color: #222">
+                    Rating:
+                    {% for i in "12345" %}
+                        {% if forloop.counter <= r.rating %}
+                        <span class="star filled"">&#9733;</span>
+                        {% else %}
+                        <span class="star">&#9734;</span>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <br>
+                    <p style="text-align: left; font-family: Georgia, 'Times New Roman', Times, serif; font-size: 1.3em; color: #222"">
+                        {{r.review}} - {{r.timestamp}}
+                    </p> 
+                    <br>
+            </div>
+            <br>
+            <br>
+    
+        {% endfor %}
+
+    {% else %}
+        <div>
+            <h3 style="margin-left: 20px">No Reviews.</h3> <br>
+        </div>
+    {% endif %}
+    <br>
+
+</div>
+
+{% endblock %}

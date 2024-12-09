@@ -1,0 +1,48 @@
+<!--Ieva sagaitis, ievas@bu.edu -->
+
+{% load static %}
+<html>
+
+<head>
+    <title>GreatReads</title>
+    <link rel="stylesheet" href="https://cs-people.bu.edu/ievas/final_project/project.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <h1 id="head-title">GreatReads <span style='margin-left: 20px;'>|</span> </h1>
+        <nav>
+            <ul class="nav-list">
+
+                <div class="nav-left">
+                    <li class="nav-link"><a href="{% url 'home' %}">Books</a></li>
+                    <li class="nav-link"><a href="{% url 'users' %}">Profiles</a></li>
+                    <li class="nav-link"><a href="{% url 'statistics' %}">Statistics</a></li>
+                    {% if request.user.is_authenticated%}
+                    <li class="nav-link"><a href="{% url 'feed' %}">Feed</a></li>
+                    <div style="margin-left: 50%; width: 700px; margin-top: 10px; color: #222; border: 1px solid black; border-radius: 12px; padding-top: 3px;"
+                        class="login-info">
+                        <i class="fa-solid fa-user" style="margin-right: 5px"></i>
+                        {{ request.user }}
+                        {% endif %}
+
+                    </div>
+                </div>
+
+                {% if not request.user.is_authenticated%}
+                <div class="nav-right" style="margin-left: 70%; ">
+                    <li class="nav-link"><a href="{% url 'login' %}">Login</a></li>
+                    <li class="nav-link"><a href="{% url 'register' %}">Register</a></li>
+                </div>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    {% block content %}
+    {% endblock %}
+
+</body>
+
+</html>

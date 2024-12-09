@@ -1,0 +1,77 @@
+
+<!--Ieva sagaitis, ievas@bu.edu -->
+
+{% extends 'project/base.html' %}
+{% block content %}
+
+<br>
+<div class="search-bar">
+    <form method="GET" action="{% url 'books_list' %}" style="margin: 0 auto; margin-bottom: 34px;">
+        <input type="text" name="q" placeholder="Search for books..." style="padding: 8px; width: 200px;">
+        <button type="submit" style="margin: 0 auto;  background-color: #efe5d6; padding: 8px; text-align: center; border-radius: 12px; font-size: 0.25em; border: 1px solid black; cursor: pointer; width: 170px; margin-right: 70px;">
+            Search
+        </button>
+        <a href="{% url 'book_detail' random_book.pk %}" class="not-sure" style="margin: 0 auto;  background-color: #efe5d6; padding: 8px; text-align: center; border-radius: 12px; font-size: 0.25em; border: 1px solid black; cursor: pointer; width: 170px; text-decoration: none; color: #222;">
+            Not Sure What To Read?
+        </a>
+    </form>
+</div>
+
+<div>
+    <br><br>
+        <div class="book-grid">
+            {% if results %}
+            {% for r in results %}
+
+                <div class="book-card">
+
+                    <div class="book-card-image">
+                        <a href="{%url 'book_detail' r.pk %}" style="text-decoration: none"> 
+                            <img src="{{r.image_url}}" alt="{{r.title}} cover image">
+                        </a>
+                    </div>
+
+                    <div class="book-card-content">
+                        <a href="{% url 'book_detail' r.pk %}" style="text-decoration: none"> 
+                            <h4>{{r.title}}</h4>
+                        </a>
+                        <br>
+                        <h5>{{r.author}}</h5>
+                    </div>
+
+                </div>
+                
+            {% endfor %}
+        </div>
+        {% else %}
+        <div style="text-align: center; margin: 0 auto; display:flex; justify-content: center; align-items: center;">
+            <h3 style="margin: 0 auto; color: #333; font-weight: 400; font-size: 2.0em;">No books found.</h3>
+        </div>
+        {% endif %} 
+    
+
+        <div class="pagination-controls">
+            {% if is_paginated %}
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                    <li>
+                        <span><a href="?page={{ page_obj.previous_page_number }}">Previous</a></span>
+                 
+                    </li>
+                    <br>
+                {% endif %}
+                    <li class="current-page">
+                        <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</span>
+                    </li>
+                {% if page_obj.has_next %}
+                <br>
+                    <li>
+                        <span><a href="?page={{ page_obj.next_page_number }}">Next</a></span>
+                    </li>
+                {% endif %}
+                </ul>
+            {% endif %}
+        </div>
+</div>
+    
+{% endblock %}

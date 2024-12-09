@@ -1,0 +1,49 @@
+<!--This is the html file that creates a profile from the corresponding
+create profile form
+-->
+
+<!--Ieva sagaitis, ievas@bu.edu -->
+
+{% extends 'project/base.html' %}
+
+
+{% block content %}
+<br>
+<div style="margin: 0 auto; ">
+    <h2 id="register-title">Add a Profile and User</h2>
+    <hr style="width: 40%; color: black; border: 1px solid black;">
+    <br>
+
+    <form method="POST" class="profile-form">
+        {% csrf_token %}
+        
+        <div class="review-card" style="background-color: #f2f2f2; align-items: left;">
+            <h3 style="display: flex; flex-direction: column; align-items: center; font-family: Georgia, 'Times New Roman', Times, serif;">User Information</h3>
+            <br>
+            {{ user_creation_form.as_p }}
+        </div>
+
+        <br><br>
+
+        <div style="display: flex; flex-direction: column; align-items: center; font-family: Georgia, 'Times New Roman', Times, serif; background-color: #f2f2f2;" class="review-card" >
+            <h3>Profile Information</h3>
+            {{ form.as_p }}
+        </div>
+
+        <br>
+
+        <div class="form-actions" style="margin: 0 auto; display: block; justify-content: center; align-items: center;">
+            <button type="submit" class="form-action-btn" style="display: block; margin: 0 auto;  background-color: #efe5d6; padding: 8px; text-align: center; border-radius: 12px; font-size: 1em; border: 1px solid black; cursor: pointer; width: 170px; text-decoration: none; color: #222;">Create Profile</button> 
+            <br>
+            <a href="{% url 'books' %}"  class="form-action-btn" style="display: block; margin: 0 auto;  background-color: #efe5d6; padding: 8px; text-align: center; border-radius: 12px; font-size: 1em; border: 1px solid black; cursor: pointer; width: 160px; text-decoration: none; color: #222;">
+                Cancel
+            </a>
+            <br>
+        </div>
+    </form>
+</div>
+
+<br><br>
+
+
+{% endblock %}

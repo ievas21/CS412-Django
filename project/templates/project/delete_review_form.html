@@ -1,0 +1,41 @@
+<!--Ieva sagaitis, ievas@bu.edu -->
+
+{% extends 'project/base.html' %}
+
+{% block content %}
+
+<br><br>
+
+<div class="review-card" style=" background-color: #f2f2f2; width: 60%">
+    <br>
+    <h2>Delete the Review?</b></h2>
+    <br>
+
+    <form method="POST" class="profile-form">
+        <!-- Display the form (context variable) -->
+        <div style="text-align: center;">
+            {{ form.as_p }}
+        </div>
+
+        {% csrf_token %}
+        
+        <div style="text-align: center; color: #222">
+            <p style="text-align: center; color: #222">{{ review.review}}</p>
+            <p style="text-align: center; color: #222">Made On: {{ review.timestamp }}</p>
+
+        </div>
+        <br>
+
+        <div class="form-actions" style="margin: 0 auto; text-align: center;">
+            <button type="submit" class="go-back" style="font-size: 0.9em; display: inline;">
+                <i class="fa-solid fa-pencil">  Delete</i>
+            </button> <br><br>
+            <a href="{% url 'user_detail' review.person.pk %}" class="go-back" style="font-size: 0.9em; display: inline;">
+                <i class="fa-solid fa-ban">   Cancel</i>
+            </a>
+           
+        </div>
+    </form>
+</div>
+
+{% endblock %}
