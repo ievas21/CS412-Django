@@ -1,5 +1,7 @@
 
 <!--Ieva sagaitis, ievas@bu.edu -->
+<!-- Displays the detail view for a book instance. -->
+<!-- project/templates/project/book_detail.html -->
 
 {% extends 'project/base.html' %}
 {% block content %}
@@ -9,6 +11,7 @@
         <h2 style="margin: 0 auto; text-align: center;"><b>{{book.title}}</b> - <b>{{book.author}}</b></h2>
     </div>
         <div class="book-detail">
+            <!--Display all the information for a book: cover, description, published year, and average rating -->
             <img src="{{book.image_url}}" alt="{{book.title}} cover image.">
             <div style="display: block; align-items: center; text-align: center;">
                 <p style="text-align:left;">
@@ -23,14 +26,18 @@
                     <b>Published:</b> {{book.yr_published}} 
                 </p>
                 <br>
+                <!--Add functionality for finding the book on amazon -->
                 <a href="https://www.amazon.com/s?k={{book.title}} - {{book.author}}" target="_blank" style="margin-right: 30px;" class="add-to-list">Find On Amazon</a>
+                <!--Add functionality for re-directing the user to the reviews page for the book -->
                 <a href="{% url 'book_reviews' book.pk %}" class="add-to-list" style="margin-right: 30px;">Community Reviews</a>
+                <!--Only display the add a review button for a logged-in user -->
                 {% if request.user.is_authenticated %}
                 <a href="{% url 'create_review' book.pk %}" class="add-to-list">Add A Review</a>
                 {% endif %}
                 <br><br><br>
 
                 {% if request.user.is_authenticated %}
+                <!-- Add a form to regulate adding this book to the book list field for a user -->
                 <form method="POST">
                     {% csrf_token %}
                     {% if not already_in_list %}
@@ -38,7 +45,7 @@
                         Add to To-Read List
                     </button>
                     {% endif %}
-
+                    <!-- Add a form to regulate adding this book to the currently reading field for a user -->
                     {% if not is_currently_marked_reading %}
                     <button type="submit" class="add-to-list" name="mark_as_currently_reading" style="display: inline; justify-content: center; align-items: center; margin: 0 auto; background-color: #eddfcc; padding: 7px; width: 300px; text-align: center; border-radius: 12px; font-family: Georgia, 'Times New Roman', Times, serif; font-size: 1.1em; border: 1px solid black; height: 45px;">
                         Add As Currently Reading

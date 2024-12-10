@@ -1,5 +1,7 @@
 
 <!--Ieva sagaitis, ievas@bu.edu -->
+<!-- Displays the meaningful report for the database (i.e. top-rated books, worst-rated books, etc.) -->
+<!-- project/templates/project/statistics.html -->
 
 {% extends 'project/base.html' %}
 
@@ -7,6 +9,7 @@
 
 <br>
 
+<!-- Display the 12 top-rated books from 2024 and their ratings-->
 <h2 id="statistics-title"><b>Top-Rated Books From 2024</b></h2>
 <hr style="width: 40%; color: black; border: 1px solid black;">
 <br>
@@ -37,6 +40,7 @@
 <br>
 <br>
 
+<!-- Display the 12 most-reviewed books and the number of ratings -->
 <h2 id="statistics-title"><b>Most Reviewed Books</b></h2>
 <hr style="width: 40%; color: black; border: 1px solid black;">
 <br>
@@ -57,13 +61,14 @@
                     <h5>{{book.num_ratings}} ratings</h5>
                 </div>
             </div>
-                {% endfor %}
+            {% endfor %}
     </div>
 <br>
 <br>
 <br>
 <br>
 
+<!-- Display the 12 most-shelved books and the number of shelvings -->
 <h2 id="statistics-title"><b>Most Shelved Books</b></h2>
 <hr style="width: 40%; color: black; border: 1px solid black;">
 <br>
@@ -93,6 +98,7 @@
 <br>
 <br>
 
+<!-- Display the 12 worst-reviewed books and the average rating -->
 <h2 id="statistics-title"><b>Worst-Rated Books From 2024</b></h2>
 <hr style="width: 40%; color: black; border: 1px solid black;">
 <br>

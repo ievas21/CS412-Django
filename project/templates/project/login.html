@@ -2,24 +2,26 @@
 {% block content %}
 
 <!--Ieva sagaitis, ievas@bu.edu -->
+<!-- Displays the login form, in order to log-in a user -->
+<!-- project/templates/project/login.html -->
 
-<!-- This basic authentication form works.
-- need to set "next" to redirect to correct page.
--->
 <br>
 <br>
 <h2 style="margin: 0 auto; text-align: center; font-size: 2em;">Login Into Account</h2>
 <hr style="width: 30%; color: #222; border: 1px solid #222;">
 <br>
 <div style="margin: 0 auto; text-align: center;" class="login-div">
+<!-- Display the form that will take in the username and password as a POST request -->
 <form method="post" action="{% url 'login' %}" >
     {% csrf_token %}
+    <!-- Display the username and password fields -->
     Username:   {{form.username}}
     <br><br>
     Password:   {{form.password}}
     {% if request.GET.next %}
     <input type="hidden" name="next" value="{{request.GET.next}}">
     {% else %}
+    <!--Take the logged-in user to the book list view on successful login-->
     <input type="hidden" name="next" value="{% url 'books' %}">
     {% endif %}
     <br><br>

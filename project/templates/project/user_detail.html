@@ -1,20 +1,24 @@
 
 <!--Ieva sagaitis, ievas@bu.edu -->
+<!-- Displays the user detail page with the user's profile, friends, reviews, and to-read list -->
+<!-- project/templates/project/user_detail.html -->
 
 {% extends 'project/base.html' %}
 {% block content %}
 <br><br>
 
 <div class="reviews-and-profile">
-
     <div class="profile-detail-container">
+        <!-- Display the profile first and last name -->
         <h1>{{user.first_name}} {{user.last_name}}</h1>
         <hr>
         <br>
             <div class="book-grid">
+                <!--Display the profile details like name, image, add friends button (if authenticated), and logout button -->
                     <div class="profile-card-detail">
                         <img src="{{user.image_url}}" alt="Picture of {{user.first_name}} {{user.last_name}}">
                         <br><br>
+                        <!-- Only show the logout and add_friends functionality if it is the logged-in user's account-->
                         {% if request.user.is_authenticated and request.user == user.user %}
                         <form method="POST" action="{% url 'logout' %}">
                             {% csrf_token %}
@@ -30,6 +34,7 @@
             <hr>
 
             <div class="profile-detail-book-container">
+                <!-- Display the currently reading book that the user is reading, if it exists -->
                 {% if user.currently_reading %}
                     <h2><b>Currently Reading:</b> {{user.currently_reading.title}} by {{user.currently_reading.author}}</h2>
                     <br>
@@ -46,18 +51,23 @@
         <br>
         {% if reviews %}
             {% for r in user.get_reviews %}
+            <!-- Obtain the user's reviews  -->
                 <div class="review">
                     <div class="review-header">
                         <img class="review-profile-img" src={{user.image_url}} alt="{{ user.first_name }}">
+                        <!-- Link to the book that the review was made about -->
                         <a href="{% url 'book_detail' r.book.pk %}" style="text-decoration: none;">
                             <h3 style="text-align: left;" ><b>{{r.book}}</b></h3>
                         </a>
                     </div>
                     <hr>
                     <div style="text-align: left; font-size: 17px; color: #222">
+                        <!--Display the rating for each review-->
                         Rating:
+                        <!-- Loop through 5 times, for the 5 possible stars-->
                         {% for i in "12345" %}
                             {% if forloop.counter <= r.rating %}
+                            <!-- Use the unicode for unfilled and filled stars -->
                             <span class="star filled"">&#9733;</span>
                             {% else %}
                             <span class="star">&#9734;</span>
@@ -69,6 +79,7 @@
                             {{r.review}} - {{r.timestamp}}
                         </p> 
                         <br>
+                    <!-- Only show the update and delete review buttons if it is the logged-in user's profile -->
                     {% if request.user.is_authenticated and request.user == user.user %}
                     <div class="user-btns">
                         <a href="{% url 'update_review' r.pk %}" class="go-back" style="font-size: 1em; margin-right: 20px;">
@@ -106,6 +117,7 @@
     {% if book_list %}
     <div class="friend-grid">
         {% for b in book_list %}
+         <!-- Display the books in the to-read list - also linking them back to their details views -->
             <div class="book-card">
                 <a href="{% url 'book_detail' b.book.pk %}" style="text-decoration: none;">
                     <img src="{{b.book.image_url}}" alt="{{b.book.title}} - {{b.book.author}}">
@@ -133,6 +145,7 @@
     <div class="friend-grid">
         {% for f in friends %}
             <div class="friend-card">
+                 <!-- Display the friends that have a friend relationship with the person instance -->
                 <a href="{% url 'user_detail' f.pk %}" style="text-decoration: none;">
                     <h3 style="text-align: center;" >{{f.first_name}} {{f.last_name}}</h3>
                 </a>

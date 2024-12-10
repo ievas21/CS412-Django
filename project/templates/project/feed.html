@@ -1,5 +1,7 @@
 
 <!--Ieva sagaitis, ievas@bu.edu -->
+<!-- Displays the friend review feed when a user is logged-in (including their own reviews) -->
+<!-- project/templates/project/feed.html -->
 
 {% extends 'project/base.html' %}
 {% block content %}
@@ -12,6 +14,7 @@
     <br>
     {% if feed %}
         {% for r in feed %}
+        <!-- Display the review, including the rating, review message, and the user who created it -->
             <div class="feed-div">
                 <div class="review-header">
                     <img class="review-profile-img" src={{r.person.image_url}} alt="{{ r.person.first_name }}">
@@ -21,7 +24,9 @@
                 </div>
                 <hr>
                 <div style="text-align: left; font-size: 17px; color: #222">
+                    <!-- Display the rating as unicode filled stars, depending on the rating-->
                     Rating:
+                    <!-- iterate 5 times, for the 5 stars in a rating -->
                     {% for i in "12345" %}
                         {% if forloop.counter <= r.rating %}
                         <span class="star filled"">&#9733;</span>
@@ -31,6 +36,7 @@
                     {% endfor %}
                 </div>
                 <br>
+                <!-- Display the review underneath the star rating -->
                     <p style="text-align: left; font-family: Georgia, 'Times New Roman', Times, serif; font-size: 1.3em; color: #222"">
                         {{r.review}} - {{r.timestamp}}
                     </p> 
@@ -43,6 +49,7 @@
 
     {% else %}
         <div>
+            <!-- Display a message if there are no reviews in a user's field -->
             <h3 style="margin-left: 20px">No Reviews.</h3> <br>
         </div>
     {% endif %}

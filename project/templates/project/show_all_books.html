@@ -1,16 +1,20 @@
 
 <!--Ieva sagaitis, ievas@bu.edu -->
+<!-- Displays all the book model instances-->
+<!-- project/templates/project/show_all_books.html -->
 
 {% extends 'project/base.html' %}
 {% block content %}
 
 <br>
 <div class="search-bar">
+    <!--Display the search bar that takes in the query made by the user and sends a GET request -->
     <form method="GET" action="{% url 'books_list' %}" style="margin: 0 auto; margin-bottom: 34px;">
         <input type="text" name="q" placeholder="Search for books..." style="padding: 8px; width: 200px;">
         <button type="submit" style="margin: 0 auto;  background-color: #efe5d6; padding: 8px; text-align: center; border-radius: 12px; font-size: 0.25em; border: 1px solid black; cursor: pointer; width: 170px; margin-right: 70px;">
             Search
         </button>
+        <!-- Display the button that takes the user to a random book from the database -->
         <a href="{% url 'book_detail' random_book.pk %}" class="not-sure" style="margin: 0 auto;  background-color: #efe5d6; padding: 8px; text-align: center; border-radius: 12px; font-size: 0.25em; border: 1px solid black; cursor: pointer; width: 250px; text-decoration: none; color: #222;">
             Not Sure What To Read?
         </a>
@@ -22,9 +26,8 @@
         <div class="book-grid">
             {% if results %}
             {% for r in results %}
-
+            <!--Display all of the books (either as results from the query or all books in the database)  -->
                 <div class="book-card">
-
                     <div class="book-card-image">
                         <a href="{%url 'book_detail' r.pk %}" style="text-decoration: none"> 
                             <img src="{{r.image_url}}" alt="{{r.title}} cover image">
@@ -44,15 +47,17 @@
             {% endfor %}
         </div>
         {% else %}
+        <!--If there are no books returned by the query, display this message -->
         <div style="text-align: center; margin: 0 auto; display:flex; justify-content: center; align-items: center;">
             <h3 style="margin: 0 auto; color: #333; font-weight: 400; font-size: 2.0em;">No books found.</h3>
         </div>
         {% endif %} 
     
-
+        <!-- Restrict the number of books to 48 per page -->
         <div class="pagination-controls">
             {% if is_paginated %}
             <ul class="pagination">
+                <!-- include functionality to return to the previous page -->
                 {% if page_obj.has_previous %}
                     <li>
                         <span><a href="?page={{ page_obj.previous_page_number }}">Previous</a></span>
@@ -64,6 +69,7 @@
                         <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</span>
                     </li>
                 {% if page_obj.has_next %}
+                <!-- include functionality to go to the next page -->
                 <br>
                     <li>
                         <span><a href="?page={{ page_obj.next_page_number }}">Next</a></span>

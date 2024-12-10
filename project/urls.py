@@ -3,6 +3,7 @@ from . import views
 from django.contrib.auth import views as auth_views
 
 # Ieva sagaitis, ievas@bu.edu
+# Defines the url patterns for our application
 
 urlpatterns = [
     path('', views.BooksListView.as_view(), name = "home"), # shows all the books (serves as the main page of the application)

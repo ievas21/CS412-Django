@@ -1,4 +1,7 @@
+
 <!--Ieva sagaitis, ievas@bu.edu -->
+<!-- Displays all of the reviews for a book. -->
+<!-- project/templates/project/book_reviews.html -->
 
 {% extends 'project/base.html' %}
 {% block content %}
@@ -12,12 +15,14 @@
     <div class="review">
         {% if reviews %}
         {% for r in reviews %}
+        <!--Iterate through the reviews to display the review, rating, and the user who created it-->
         <div class="review-card" style="text-align: left;">
             <div class="review-header">
                 <img class="review-profile-img" src={{r.person.image_url}} alt="{{ r.person }}">
                     <h2 style="text-align: center; font-size: 1.15em"><b>{{r.person}}</b></h2>
             </div>
             <div style="text-align: left; font-size: 17px; color: #222">
+                <!-- Dsiplay the rating as unicode stars that are filled/unfilled based on the rating -->
                 Rating:
                 {% for i in "12345" %}
                     {% if forloop.counter <= r.rating %}
@@ -41,11 +46,13 @@
     </div>
     {% else %}
     <div>
+        <!--Dsiplay this message if there exist no reviews for the specific book -->
         <h3 style="margin-right: 10px; font-size: 1.2em;">No Reviews.</h3>
     </div>
     {% endif %}
     <br>
     <div class="go-back-btn-div">
+        <!-- Redirect the user back to the book_detail view -->
         <a href="{% url 'book_detail' book.pk %}" class="go-back" style="font-size: 0.9em;">
             <i class="fa-solid fa-arrow-left"> Go Back</i>
         </a>

@@ -1,5 +1,7 @@
 
 <!--Ieva sagaitis, ievas@bu.edu -->
+<!-- Displays all the user model instances-->
+<!-- project/templates/project/show_all_users.html -->
 
 {% extends 'project/base.html' %}
 {% block content %}
@@ -9,6 +11,7 @@
         <div class="profile-grid" style="margin: 0 20px;">
             {% for r in results %}
 
+                <!-- Display the person instances as a card in a grid -->
                 <div class="profile-card">
                     <a href="{%url 'user_detail' r.pk %}"> 
                         <img src="{{r.image_url}}" alt="Picture of{{r.first_name}} {{r.last_name}}.">

@@ -1,4 +1,7 @@
+
 <!--Ieva sagaitis, ievas@bu.edu -->
+<!-- Displays the create review form when creating a review. -->
+<!-- project/templates/project/create_review_form.html -->
 
 {% extends 'project/base.html' %}
 
@@ -12,13 +15,12 @@
     <br>
 
     <form method="POST" class="profile-form">
-        <!-- Display the form (context variable) -->
-
+            <!--Display the star rating, as the unicode filled/unfilled stars based on the rating out of 5 -->
             <div class="star-rating">
                 <div style="display:inline; font-size: 18px; margin-right: 10px;">
                 </div>
                 <div class="star-rating">
-                    <!-- Lowest rating (1 star) on the left -->
+                    <!-- lowest rating (1 star) on the left -->
                     <input type="radio" id="star1" name="rating" value="5">
                     <label for="star1">&#9733;</label>
     
@@ -33,11 +35,12 @@
     
                     <input type="radio" id="star5" name="rating" value="1">
                     <label for="star5">&#9733;</label>
+                     <!-- highest rating (r star) on the right -->
                 </div>
         </div>
 
         <br>
-
+         <!-- Display the rest of the form (review message) -->
         <div>
             {{ form.review }}
         </div>
@@ -45,11 +48,12 @@
         {% csrf_token %}
 
         <br>
-
+         <!-- Add functionality for creating the review and re-directing to the book_detail view after creation -->
         <div class="form-actions" style="margin: 0 auto; text-align: center;">
             <button type="submit" class="go-back" style="font-size: 0.9em;">
                 <i class="fa-solid fa-pencil">  Create</i>
             </button> <br><br>
+            <!-- Add functionality for cancel and re-directing to the book_detail view after creation -->
             <a href="{% url 'book_detail' book.pk %}" class="go-back" style="font-size: 0.9em;">
                 <i class="fa-solid fa-ban">   Cancel</i>
             </a>

@@ -2,17 +2,19 @@ from django import forms
 from .models import Person, Review
 
 # Ieva sagaitis, ievas@bu.edu
-# Creates forms for our project
+# Creates forms for our project that are used for CRUD operations
 
 class RegisterForm(forms.ModelForm):
-    '''A form to create User data.'''
+    '''A form to create Person data.'''
 
     class Meta:
-        '''Associate this form with the User model'''
+        '''Associate this form with the Person model.'''
         model = Person
 
+        # define the fields that we want the user to fill in
         fields = ['first_name', 'last_name', 'email', 'image_url']
 
+        # design the field inputs for styling
         widgets = {
             'first_name': forms.TextInput(attrs={
                 'class': 'small-text-field',
@@ -36,26 +38,11 @@ class RegisterForm(forms.ModelForm):
             }),
         }
 
-class UpdateUserForm(forms.ModelForm):
-    '''A form to update User data.'''
-
-    class Meta:
-        '''Associate this form with the User model'''
-        model = Person
-
-        fields = ['image_url']
-
-        widgets = {
-            'image_url': forms.URLInput(attrs={
-                'class': 'small-text-field',
-                'placeholder': 'Profile Image URL',
-                'style': 'width: 150px; margin-right: 45px;',
-            }),
-        }
 
 class UpdateReviewForm(forms.ModelForm):
     '''A form to update Review data.'''
 
+    # define the rating choices that the user will select from in the form
     RATING_CHOICES = [
         (1, '1 Star'),
         (2, '2 Stars'),
@@ -64,6 +51,7 @@ class UpdateReviewForm(forms.ModelForm):
         (5, '5 Stars'),
     ]
 
+    # define the rating field to use the rating choices above as a radio select input
     rating = forms.ChoiceField(
         choices=RATING_CHOICES,
         widget=forms.RadioSelect(),
@@ -71,10 +59,10 @@ class UpdateReviewForm(forms.ModelForm):
     )
 
     class Meta:
-        '''Associate this form with the Review model'''
+        '''Associate this form with the Review model.'''
         model =Review
 
-        # only change these fields
+        # only change the review and rating field.
         fields = ['review', 'rating']
 
         widgets = {
@@ -114,8 +102,8 @@ class CreateReviewForm(forms.ModelForm):
         # only change these fields
         fields = ['review', 'rating']
 
+        # design the field inputs for styling
         widgets = {
-
             'review': forms.Textarea(attrs={
                 'class': 'large-text-field',
                 'style': 'width: 700px; height: 150px;',
@@ -123,6 +111,7 @@ class CreateReviewForm(forms.ModelForm):
                 'cols': 60,
             }),
         }
+        # remove the label from review
         labels = {
             'review': '', 
         }

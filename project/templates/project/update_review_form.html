@@ -1,4 +1,7 @@
+
 <!--Ieva sagaitis, ievas@bu.edu -->
+<!-- Displays the update review form for a review made from a user -->
+<!-- project/templates/project/update_review_form.html -->
 
 
 {% extends 'project/base.html' %}
@@ -13,13 +16,14 @@
     <br>
 
     <form method="POST" class="profile-form">
-        <!-- Display the form (context variable) -->
+        <!-- display the form (context variable) -->
 
         <div class="star-rating">
+            <!-- Display the unfilled stars in the form, to update the review -->
             <div style="display:inline; font-size: 18px; margin-right: 10px;">
             </div>
             <div class="star-rating">
-                <!-- Lowest rating (1 star) on the left -->
+                <!-- lowest rating (1 star) on the left -->
                 <input type="radio" id="star1" name="rating" value="5">
                 <label for="star1">&#9733;</label>
 
@@ -38,7 +42,7 @@
         </div>
 
         <br>
-
+        <!-- Display the rest of the form (review text field) -->
         <div>
             {{ form.review }}
         </div>
@@ -48,9 +52,11 @@
         <br>
 
         <div class="form-actions" style="margin: 0 auto; text-align: center;">
+            <!-- Display the update button -->
             <button type="submit" class="go-back" style="font-size: 0.9em;">
                 <i class="fa-solid fa-pencil"> Update</i>
             </button> <br><br>
+            <!-- Display the cancel button to redirect the user back to their detail view -->
             <a href="{% url 'user_detail' review.person.pk %}" class="go-back" style="font-size: 0.9em;">
                 <i class="fa-solid fa-ban"> Cancel</i>
             </a>

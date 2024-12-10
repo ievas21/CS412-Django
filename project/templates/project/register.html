@@ -1,8 +1,7 @@
-<!--This is the html file that creates a profile from the corresponding
-create profile form
--->
 
 <!--Ieva sagaitis, ievas@bu.edu -->
+<!-- Displays the register form, in order to create a user instance that is tied to a person instance-->
+<!-- project/templates/project/register.html -->
 
 {% extends 'project/base.html' %}
 
@@ -13,13 +12,16 @@ create profile form
     <h2 id="register-title">Add a Profile and User</h2>
     <hr style="width: 40%; color: black; border: 1px solid black;">
     <br>
-
+    
+    <!-- Wrap both forms into one form tag, to ensure they get submiited simutaneously  -->
     <form method="POST" class="profile-form">
         {% csrf_token %}
         
         <div class="review-card" style="background-color: #f2f2f2; align-items: left;">
             <h3 style="display: flex; flex-direction: column; align-items: center; font-family: Georgia, 'Times New Roman', Times, serif;">User Information</h3>
             <br>
+            
+            <!--Display the django built-in user creation form for creation of the user instance-->
             {{ user_creation_form.as_p }}
         </div>
 
@@ -27,12 +29,14 @@ create profile form
 
         <div style="display: flex; flex-direction: column; align-items: center; font-family: Georgia, 'Times New Roman', Times, serif; background-color: #f2f2f2;" class="review-card" >
             <h3>Profile Information</h3>
+            <!-- Display the form for creating the profile that is tied to the created user instance -->
             {{ form.as_p }}
         </div>
 
         <br>
 
         <div class="form-actions" style="margin: 0 auto; display: block; justify-content: center; align-items: center;">
+            <!-- Display buttons for submission of the form and for the cancellation --> 
             <button type="submit" class="form-action-btn" style="display: block; margin: 0 auto;  background-color: #efe5d6; padding: 8px; text-align: center; border-radius: 12px; font-size: 1em; border: 1px solid black; cursor: pointer; width: 170px; text-decoration: none; color: #222;">Create Profile</button> 
             <br>
             <a href="{% url 'books' %}"  class="form-action-btn" style="display: block; margin: 0 auto;  background-color: #efe5d6; padding: 8px; text-align: center; border-radius: 12px; font-size: 1em; border: 1px solid black; cursor: pointer; width: 160px; text-decoration: none; color: #222;">
