@@ -1,9 +1,14 @@
+/* Ieva Sagaitis ievas@bu.edu */
+/* Creates the styling for the project application */
+
+/* Styling for the body of the application  */
 body {
     background-color: #ede1cf;
     font-family: Georgia, "Times New Roman", Times, serif;
     font-weight: normal;
 }
 
+/* Styling for most text tags that will be used + header */
 h1,
 h2,
 h3,
@@ -14,6 +19,7 @@ p {
     color: #455d7a;
 }
 
+/* Specific styling for the header */
 header {
     display: flex;
     align-items: center;
@@ -25,6 +31,7 @@ header {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Styling the header title -- application name: 'GoodReads' */
 #head-title {
     margin: 0 20px 0 0;
     font-size: 2.2em;
@@ -35,6 +42,7 @@ header {
     color: #222;
 }
 
+/* Styling for the register title -- Add a Profile and A User */
 #register-title {
     margin: 0 auto;
     font-size: 2.0em;
@@ -46,6 +54,7 @@ header {
     text-align: center;
 }
 
+/* Title for the meaningful report page titles */
 #statistics-title {
     margin: 0 auto;
     font-size: 2.0em;
@@ -58,6 +67,7 @@ header {
 
 }
 
+/* Search bar styling on the book list view page */
 .search-bar {
     font-size: 4em;
     font-family: Georgia, "Times New Roman", Times, serif;
@@ -73,16 +83,19 @@ header {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Alignment for h1 tags */
 h1 {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+/* Alignment for navbar elements */
 nav ul {
     text-align: center;
 }
 
+/* Styling for containers used across pages */
 .container {
     font-family: verdana;
     color: black;
@@ -98,6 +111,7 @@ nav ul {
     width: fit-content;
 }
 
+/* Styling for the div used in the book-list view containing all books */
 .book-container {
     width: 100%;
     max-width: 95%;
@@ -109,6 +123,7 @@ nav ul {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Styling for book images within the book container  */
 .book-container img {
     border-radius: 15px;
     text-align: left;
@@ -120,6 +135,7 @@ nav ul {
 
 }
 
+/* Styling for h2 and h3 tags for book cards within the book container */
 .book-container h2,
 h3 {
     font-size: 1.5em;
@@ -130,6 +146,7 @@ h3 {
 
 }
 
+/* Styling for the book detail page header containing the title and author */
 .book-detail-header {
     font-size: 1.1em;
     margin-bottom: 30px;
@@ -140,6 +157,7 @@ h3 {
     text-align: center;
 }
 
+/* Div styling for book detail page container */
 .book-detail {
     display: flex;
     flex-direction: row;
@@ -148,6 +166,7 @@ h3 {
     font-size: 1.1em;
 }
 
+/* p tag styling for book description in book detail view */
 .book-detail p {
     font-size: 1.1em;
     color: #222;
@@ -155,6 +174,7 @@ h3 {
     font-weight: 400;
 }
 
+/* Link styling for links within the book detail view */
 .book-detail a {
     font-size: 1.1em;
     color: #222;
@@ -168,7 +188,7 @@ h3 {
     background-color: #eddfcc;
 }
 
-
+/* Nav bar styling for base.html template */
 .nav-list {
     list-style: none;
     display: flex;
@@ -179,18 +199,20 @@ h3 {
     justify-content: space-between;
 }
 
+/* Styling for the login and register links  */
 .nav-right {
     margin-left: auto;
     display: flex;
     gap: 15px;
 }
 
-
+/* Styling for the statistics, books, profiles, and feed links */
 .nav-left {
     display: flex;
     gap: 10px;
 }
 
+/* Additional styling for the bullet points within thr navbar */
 .nav-list li {
     margin: 0 10px;
     margin-top: 6px;
@@ -200,6 +222,7 @@ h3 {
     width: 130px;
 }
 
+/* Additional styling for the base.html links */
 .nav-list a {
     margin-top: 8px;
     margin-bottom: 0px;
@@ -212,18 +235,22 @@ h3 {
     transition: background-color 0.3s;
 }
 
+/* Navbar elements transformation on hover */
 .nav-list li:hover {
     background-color: #e3cdae;
 }
 
+/* Alignment styling for nav links in navbar */
 .nav-link {
     display: inline;
 }
 
+/* Removing underline in li tags */
 li {
     list-style-type: none;
 }
 
+/* Additional container styling for the container div used across the application */
 .container {
     width: 100%;
     max-width: 1350px;
@@ -236,6 +263,7 @@ li {
     font-family: Georgia, "Times New Roman", Times, serif;
 }
 
+/* Alignment styling for the book covers in the book list view */
 .book-grid {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
@@ -243,6 +271,7 @@ li {
     align-items: start;
 }
 
+/* Styling for the individual book cards on the book list view */
 .book-card {
     position: relative;
     overflow: hidden;
@@ -263,6 +292,7 @@ li {
     color: #222;
 }
 
+/* Styling for the book cover images on each book card */
 .book-card img {
     width: 100%;
     height: 100%;
@@ -271,6 +301,7 @@ li {
     height: 350px;
 }
 
+/* Additional styling for book images within the book detail view*/
 .book-image {
     width: 100%;
     height: 200px;
@@ -278,14 +309,17 @@ li {
     transition: height 0.3s ease;
 }
 
+/* Hovering effect on each book card in the list view*/
 .book-card:hover {
     transform: scale(1.05);
 }
 
+/* Hovering effect on each book card div in the list view*/
 .book-card-detail:hover {
     transform: scale(0);
 }
 
+/* Styling for the book card contents -- title and author */
 .book-card-content {
     padding: 0 15px;
     max-height: 0;
@@ -295,64 +329,76 @@ li {
     margin-top: 5px;
 }
 
+/* Additional styling for the book-card texts */
 .book-card h3 {
     font-size: 1.2em;
     margin: 10px 0;
 }
 
+/* Additional styling for the book-card texts */
 .book-card h4 {
     font-size: 1.2em;
     color: #222;
     margin: 5px 0;
 }
 
+/* Additional styling for the book-card texts */
 .book-card h5 {
     font-size: 1em;
     color: #222;
     margin: 0 10px;
 }
 
+/* Additional styling for the book-card texts */
 .book-card p {
     font-size: 0.9em;
     color: #222;
 }
 
+/* Hovering height effect on book cards and their images*/
 .book-card:hover .book-image {
     height: 100px;
 }
 
+/* Transformation scale effect on book card images*/
 .book-card:hover .book-image img {
     transform: scale(0.9);
 }
 
+/* Transformation scale effect on book cards in list view */
 .book-card:hover .book-card-content {
     max-height: 500px;
     opacity: 1;
 }
 
+/* Transition effects */
 .book-card,
 .book-image,
 .book-info {
     transition: all 0.3s ease;
 }
 
+/* Pagination styling */
 .pagination-controls {
     text-align: center;
     margin-top: 20px;
 }
 
+/* Pagination styling */
 .pagination {
     list-style: none;
     padding: 0;
     display: inline-flex;
 }
 
+/* Pagination styling */
 .pagination li {
     margin: 0 5px;
     margin-bottom: 20px;
     ;
 }
 
+/* Pagination styling for buttons */
 .pagination li a {
     text-decoration: none;
     color: #333;
@@ -362,15 +408,18 @@ li {
     padding: 8px;
 }
 
+/* Pagination styling for hovering effect*/
 .pagination a:hover {
     background-color: #e3cdae;
 }
 
+/* Pagination styling  for the current page number */
 .pagination .current-page {
     font-weight: bold;
     color: #333;
 }
 
+/* Profile alignment in list view*/
 .profile-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -378,6 +427,7 @@ li {
     align-items: start;
 }
 
+/* Profile card styling in list view */
 .profile-card {
     display: flex;
     flex-direction: column;
@@ -394,6 +444,7 @@ li {
     color: #455d7a;
 }
 
+/* Profile card image styling in list view */
 .profile-card img {
     width: 100%;
     height: 100%;
@@ -404,10 +455,12 @@ li {
     border-radius: 15px;
 }
 
+/* Hover effect on profile cards */
 .profile-card:hover {
     transform: scale(1.05);
 }
 
+/* Profile details div container */
 .profile-detail-container {
     flex: 1;
     max-width: 300px;
@@ -426,6 +479,7 @@ li {
     gap: 60px;
 }
 
+/* Profile details book caontiner styling holding the currently reading book */
 .profile-detail-book-container {
     display: block;
     width: 80%;
@@ -442,6 +496,7 @@ li {
     height: auto;
 }
 
+/* Styling for profile image */
 .profile-detail-container img {
     display: block;
     margin: 0 auto;
@@ -452,6 +507,7 @@ li {
     transition: transform 0.3s ease;
 }
 
+/* Styling for profile text */
 .profile-detail-container h1,
 h2 {
     font-family: Georgia, "Times New Roman", Times, serif;
@@ -460,6 +516,7 @@ h2 {
     color: #222;
 }
 
+/* Styling for the login information in login.html */
 .login-info {
     font-family: Georgia, "Times New Roman", Times, serif;
     font-weight: 400;
@@ -472,12 +529,14 @@ h2 {
 
 }
 
+/* Styling for the login information in login.html */
 .login-div {
     font-family: Georgia, "Times New Roman", Times, serif;
     font-weight: 400;
     font-size: 1.1em;
 }
 
+/* Div styling for the profile and reviews container in user detail*/
 .reviews-and-profile {
     display: flex;
     gap: 30px;
@@ -485,6 +544,7 @@ h2 {
     justify-content: flex-start;
 }
 
+/* Container styling for the profile and reviews container in user detail*/
 .profile-reviews-container {
     flex: 2;
     display: inline;
@@ -504,6 +564,7 @@ h2 {
     height: auto;
 }
 
+/* Styling for the reviews in book_reviews */
 .review-card {
     display: flex;
     flex-direction: column;
@@ -519,12 +580,14 @@ h2 {
     padding: 15px;
 }
 
+/* Additional text styling in review cards */
 .review-card p {
     color: #222;
     font-family: Georgia, "Times New Roman", Times, serif;
     font-weight: 400;
 }
 
+/* Profile photo styling for review cards */
 .review-header img {
     width: 60px;
     height: 60px;
@@ -534,6 +597,7 @@ h2 {
     vertical-align: middle;
 }
 
+/* Text styling for review book title and author */
 .review-header {
     display: flex;
     align-items: center;
@@ -542,13 +606,14 @@ h2 {
     text-align: left;
 }
 
+/* Additional text styling in review div */
 .review p {
     margin-top: 0px;
     color: #333;
     margin-bottom: 20px;
 }
 
-
+/* Button styling for retunring to previous page (i.e. cancel buttons) */
 .go-back {
     font-size: 1.1em;
     color: #222;
@@ -563,16 +628,19 @@ h2 {
 
 }
 
+/* Hovering effect on go-back buttons */
 .go-back-btn-div a:hover {
     background-color: #e3cdae;
 }
 
+/* ALignment styling for go-back buttons */
 .go-back-btn-div {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
+/* Friend container for user_detail */
 .friends-container {
     width: 100%;
     max-width: 95%;
@@ -584,6 +652,7 @@ h2 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Friend image styling in user_detail */
 .friend-card img {
     margin: 0 auto;
     align-items: center;
@@ -596,10 +665,12 @@ h2 {
     height: 300px;
 }
 
+/* Alignment for friend cards */
 .friend-card {
     display: inline;
 }
 
+/* Friend grid alignment in user_detail*/
 .friend-grid {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
@@ -607,6 +678,7 @@ h2 {
     justify-content: center;
 }
 
+/* Additional friend card styling in user_detail */
 .friend-card {
     background-color: #f9f9f9;
     border: 1px solid #ddd;
@@ -617,6 +689,7 @@ h2 {
     font-size: 0.8em;
 }
 
+/* Additional friend image styling in user_detail */
 .friend-card img {
     width: 120px;
     height: 120px;
@@ -626,71 +699,83 @@ h2 {
     display: block;
 }
 
-
+/* Hovering effects on update and delete review buttons */
 .user-btns a:hover {
     background-color: #e9c89a;
 }
 
+/* Hover effect on go-back buttons */
 .go-back:hover {
     background-color: #e9c89a;
     cursor: pointer;
 }
 
+/* Login button hovering effect */
 .login-input:hover {
     background-color: #e2b473;
     cursor: pointer;
     transform: scale(1.05);
 }
 
+/* Login link hovering effect */
 .login-link:hover {
     background-color: #e2b473;
     cursor: pointer;
     transform: scale(1.05);
 }
 
+/* Logout button hovering effect */
 .logout:hover {
     cursor: pointer;
     transform: scale(1.05);
 }
 
-
+/* Generic button styling */
 button {
     font-family: Georgia, "Times New Roman", Times, serif;
     font-weight: normal;
 }
 
+/* Review star styling */
 .star {
     font-size: 20px;
     color: #ccc;
 }
 
+/* Review star styling */
 .star.filled {
     color: black;
 }
 
+/* Review star styling -- remove the generic radio button labels */
 .star-rating input[type="radio"] {
     display: none;
 }
 
+/* Review star styling */
 .star-rating label {
     font-size: 2rem;
     color: #ccc;
     cursor: pointer;
 }
 
+/* Review star styling -- direction of stars filling */
 .star-rating {
     direction: rtl;
 }
 
+/* Review star styling -- on hover */
 .star-rating input[type="radio"]:checked~label {
     color: rgb(230, 230, 81);
 }
 
+/* Review star styling -- on hover */
 .star-rating label:hover,
 .star-rating label:hover~label {
     color: rgb(230, 230, 81);
 }
 
+/* Feed styling for a user's feed reviews */
 .feed-div {
     display: flex;
     flex-direction: column;
@@ -707,10 +792,12 @@ button {
     color: #eddfcc;
 }
 
+/* Hover effect on add-to-list button (adding books to to-read list) */
 .add-to-list:hover {
     cursor: pointer;
 }
 
+/* Form action hovering in registering a user and profile */
 .form-action-btn:hover {
     cursor: pointer;
     transform: scale(1.05);
