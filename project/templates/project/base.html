@@ -20,18 +20,17 @@
                     <li class="nav-link"><a href="{% url 'users' %}">Profiles</a></li>
                     <li class="nav-link"><a href="{% url 'statistics' %}">Statistics</a></li>
                     {% if request.user.is_authenticated%}
-                    <li class="nav-link"><a href="{% url 'feed' %}">Feed</a></li>
-                    <div style="margin-left: 50%; width: 700px; margin-top: 10px; color: #222; border: 1px solid black; border-radius: 12px; padding-top: 3px;"
+                    <li class="nav-link"><a href="{% url 'feed' %}" >Feed</a></li>
+                    <div style="margin-left: 56%; width: 400px; color: #222; border: 1px solid black; border-radius: 12px; padding-top: 3px;"
                         class="login-info">
-                        <i class="fa-solid fa-user" style="margin-right: 5px"></i>
+                        <i class="fa-solid fa-user" style="margin-right: 10px"></i>
                         {{ request.user }}
                         {% endif %}
-
                     </div>
                 </div>
 
                 {% if not request.user.is_authenticated%}
-                <div class="nav-right" style="margin-left: 70%; ">
+                <div class="nav-right" style="margin-left: 50%; ">
                     <li class="nav-link"><a href="{% url 'login' %}">Login</a></li>
                     <li class="nav-link"><a href="{% url 'register' %}">Register</a></li>
                 </div>
