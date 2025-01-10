@@ -10,4 +10,4 @@ This repository contains projects that I have created throughout my senior year.
 ## Access the Sites
 - **Voter Analytics**: https://fierce-castle-15076-c181302a9515.herokuapp.com/voter_analytics/
 - **Mini Facebook**: https://fierce-castle-15076-c181302a9515.herokuapp.com/mini_fb/
-- **GoodReads**: https://fierce-castle-15076-c181302a9515.herokuapp.com/project/
+- **ShelfShare**: https://fierce-castle-15076-c181302a9515.herokuapp.com/project/
